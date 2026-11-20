@@ -24,7 +24,7 @@
       width: 100%;
       height: 100dvh;
       overflow: hidden;
-      background-color: #0e0502;
+      background-color: #0b0402;
       font-family: 'Noto Sans TC', -apple-system, BlinkMacSystemFont, sans-serif;
       touch-action: none;
     }
@@ -36,7 +36,7 @@
       display: flex;
       justify-content: center;
       align-items: center;
-      background: radial-gradient(circle at 50% 35%, #2a1208 0%, #0d0402 100%);
+      background: radial-gradient(circle at 50% 35%, #2b1107 0%, #0a0301 100%);
       overflow: hidden;
     }
 
@@ -46,7 +46,7 @@
       height: 100%;
       max-width: 500px;
       overflow: hidden;
-      box-shadow: 0 0 70px rgba(0, 0, 0, 0.95);
+      box-shadow: 0 0 80px rgba(0, 0, 0, 0.96);
     }
 
     canvas {
@@ -55,28 +55,38 @@
       height: 100%;
     }
 
-    /* Authentic Night Market Button Styling */
+    /* Safe-area aware HUD spacing for iPhone Notch & Dynamic Island */
+    #hud-layer {
+      padding-top: max(12px, env(safe-area-inset-top));
+    }
+
+    #screen-home {
+      padding-bottom: max(54px, calc(env(safe-area-inset-bottom) + 34px));
+    }
+
+    /* Tactile App Store Grade Buttons */
     .nm-btn-primary {
-      background: linear-gradient(180deg, #ff7038 0%, #d63218 52%, #991808 100%);
-      border: 2.5px solid #ffd573;
-      box-shadow: 0 8px 24px rgba(214, 50, 24, 0.55), inset 0 2px 3px rgba(255, 255, 255, 0.45);
-      color: #fff9ec;
+      background: linear-gradient(180deg, #ff783d 0%, #d93418 50%, #991707 100%);
+      border: 2.5px solid #ffd87a;
+      box-shadow: 0 8px 26px rgba(217, 52, 24, 0.58), 0 2px 0 #5c0c02, inset 0 2px 3px rgba(255, 255, 255, 0.5);
+      color: #fffaf0;
       text-shadow: 0 2px 4px rgba(70, 8, 0, 0.85);
-      transition: transform 0.12s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.12s ease;
+      transition: transform 0.11s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.11s ease, filter 0.11s ease;
     }
 
     .nm-btn-primary:active {
       transform: scale(0.95) translateY(2px);
-      box-shadow: 0 2px 10px rgba(214, 50, 24, 0.4);
+      box-shadow: 0 3px 12px rgba(217, 52, 24, 0.42), inset 0 1px 2px rgba(255, 255, 255, 0.35);
+      filter: brightness(0.96);
     }
 
     .nm-btn-secondary {
-      background: linear-gradient(180deg, #4d2916 0%, #261107 100%);
-      border: 2px solid #eab364;
-      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.7), inset 0 1px 2px rgba(255, 224, 163, 0.35);
-      color: #ffdf9e;
+      background: linear-gradient(180deg, #522b16 0%, #261107 100%);
+      border: 2px solid #edb868;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.72), 0 2px 0 #140803, inset 0 1px 2px rgba(255, 226, 168, 0.38);
+      color: #ffe3a8;
       text-shadow: 0 2px 3px rgba(0, 0, 0, 0.85);
-      transition: transform 0.12s cubic-bezier(0.34, 1.56, 0.64, 1);
+      transition: transform 0.11s cubic-bezier(0.34, 1.56, 0.64, 1);
     }
 
     .nm-btn-secondary:active {
@@ -84,17 +94,33 @@
     }
 
     .nm-card {
-      background: linear-gradient(180deg, rgba(44, 20, 9, 0.96) 0%, rgba(22, 9, 4, 0.98) 100%);
-      border: 2.5px solid #e6a84c;
-      box-shadow: 0 20px 55px rgba(0, 0, 0, 0.9), 0 0 35px rgba(255, 165, 50, 0.22), inset 0 0 20px rgba(255, 190, 90, 0.08);
+      background: linear-gradient(180deg, rgba(46, 20, 9, 0.96) 0%, rgba(20, 8, 3, 0.98) 100%);
+      border: 2.5px solid #e8ac50;
+      box-shadow: 0 22px 60px rgba(0, 0, 0, 0.92), 0 0 38px rgba(255, 165, 50, 0.24), inset 0 0 24px rgba(255, 196, 100, 0.09);
+      animation: modalPop 0.24s cubic-bezier(0.22, 1.25, 0.36, 1);
+    }
+
+    @keyframes modalPop {
+      0% { transform: scale(0.9) translateY(10px); opacity: 0; }
+      100% { transform: scale(1) translateY(0); opacity: 1; }
     }
 
     .hud-pill {
-      background: rgba(24, 10, 4, 0.82);
-      border: 1.5px solid rgba(255, 204, 115, 0.55);
+      background: rgba(24, 10, 4, 0.84);
+      border: 1.5px solid rgba(255, 206, 120, 0.58);
       backdrop-filter: blur(8px);
       -webkit-backdrop-filter: blur(8px);
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.55);
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.55);
+    }
+
+    .hud-pulse {
+      animation: hudBump 0.26s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    @keyframes hudBump {
+      0% { transform: scale(1); }
+      45% { transform: scale(1.22); }
+      100% { transform: scale(1); }
     }
   </style>
 </head>
@@ -103,18 +129,18 @@
     <div id="game-frame">
       <canvas id="game-canvas"></canvas>
 
-      <!-- Minimal In-Game HUD (Hidden on Home Screen) -->
-      <div id="hud-layer" class="hidden absolute top-0 left-0 right-0 z-10 pointer-events-none px-3 pt-3 flex items-center justify-between">
+      <!-- Minimal In-Game HUD (Hidden on Home Screen; difficulty strictly hidden) -->
+      <div id="hud-layer" class="hidden absolute top-0 left-0 right-0 z-10 pointer-events-none px-3 flex items-center justify-between">
         <div class="flex items-center gap-2">
           <div class="hud-pill px-3 py-1 rounded-full flex items-center gap-1.5">
             <span class="text-amber-300 text-xs font-bold tracking-wider">關卡</span>
-            <span id="hud-level" class="text-white text-sm font-black">1 / 10</span>
+            <span id="hud-level" class="text-white text-sm font-black">1 / 20</span>
           </div>
-          <div class="hud-pill px-3 py-1 rounded-full flex items-center gap-1.5">
+          <div id="pill-bangles" class="hud-pill px-3 py-1 rounded-full flex items-center gap-1.5">
             <span class="text-emerald-300 text-xs font-bold">玉鐲</span>
-            <span id="hud-bangles" class="text-white text-sm font-black">3</span>
+            <span id="hud-bangles" class="text-white text-sm font-black">5</span>
           </div>
-          <div class="hud-pill px-3 py-1 rounded-full flex items-center gap-1.5">
+          <div id="pill-hits" class="hud-pill px-3 py-1 rounded-full flex items-center gap-1.5">
             <span class="text-rose-300 text-xs font-bold">套中</span>
             <span id="hud-hits" class="text-white text-sm font-black">0</span>
           </div>
@@ -126,8 +152,8 @@
       </div>
 
       <!-- HOME SCREEN: Strictly Minimalist — ONLY two buttons: "開始遊玩" & "遊戲規則", zero extra text -->
-      <div id="screen-home" class="absolute inset-0 z-20 flex flex-col items-center justify-end pb-14 px-8 pointer-events-auto">
-        <div class="w-full max-w-[240px] flex flex-col gap-3.5">
+      <div id="screen-home" class="absolute inset-0 z-20 flex flex-col items-center justify-end px-8 pointer-events-auto">
+        <div class="w-full max-w-[244px] flex flex-col gap-3.5">
           <button id="btn-start-game" type="button" class="nm-btn-primary w-full py-4 rounded-2xl text-xl font-black tracking-widest">
             開始遊玩
           </button>
@@ -152,11 +178,11 @@
             </li>
             <li class="flex items-start gap-2">
               <span class="text-emerald-400 font-bold">●</span>
-              <span>每關固定配發 <strong class="text-amber-300">3 個玉鐲</strong>（不跨關累積），套中 <strong class="text-emerald-300">+1 / +2 / +3</strong> 道具可額外增加當關投擲次數。</span>
+              <span>每關固定配發 <strong class="text-amber-300">5 個玉鐲</strong>（不跨關累積），套中 <strong class="text-emerald-300">+2 / +3</strong>（第 5 關起新增 <strong class="text-amber-300">+5</strong>）道具可額外增加當關投擲次數。</span>
             </li>
             <li class="flex items-start gap-2">
               <span class="text-emerald-400 font-bold">●</span>
-              <span>每關必須套中至少 <strong class="text-amber-300">1 個物品</strong> 才能過關，共 10 關。</span>
+              <span>每關必須套中至少 <strong class="text-amber-300">1 個物品</strong> 才能過關，共 <strong class="text-amber-300">20 關</strong>。</span>
             </li>
           </ul>
           <button id="btn-close-rules" type="button" class="nm-btn-primary w-full py-3 rounded-xl text-base font-black tracking-widest mt-2">
@@ -197,10 +223,10 @@
         </div>
       </div>
 
-      <!-- ALL 10 LEVELS CLEARED: Fullscreen Firework Celebration Screen -->
+      <!-- ALL 20 LEVELS CLEARED: Fullscreen Firework Celebration Screen -->
       <div id="modal-victory" class="hidden absolute inset-0 z-30 pointer-events-auto flex flex-col items-center justify-between py-14 px-6">
         <div class="mt-6 text-center pointer-events-none">
-          <div class="inline-block px-6 py-3 rounded-3xl bg-black/60 border border-amber-300/60 backdrop-blur-md shadow-2xl">
+          <div class="inline-block px-6 py-3.5 rounded-3xl bg-black/60 border border-amber-300/65 backdrop-blur-md shadow-2xl">
             <h1 class="text-3xl font-black text-amber-300 tracking-widest drop-shadow-md">
               恭喜全部通關！
             </h1>
@@ -209,7 +235,7 @@
             </p>
           </div>
         </div>
-        <div class="w-full max-w-[240px] mb-4">
+        <div class="w-full max-w-[244px] mb-4">
           <button id="btn-play-again" type="button" class="nm-btn-primary w-full py-4 rounded-2xl text-lg font-black tracking-widest">
             開始遊玩
           </button>
@@ -223,15 +249,90 @@
       'use strict';
 
       // ==========================================
-      // 1. REALISTIC PHYSICAL ACOUSTICS & CIRCUS BGM (Web Audio API)
+      // 1. MASTERED WEB AUDIO ENGINE (DynamicsCompressor + Lookahead 60s BGM + Physical Modal Jade Shatter)
       // ==========================================
       class SoundSystem {
         constructor() {
           this.ctx = null;
+          this.masterGain = null;
+          this.compressor = null;
           this.muted = false;
           this.bgmPlaying = false;
-          this.bgmTimer = null;
+          this.schedulerId = null;
           this.stepIndex = 0;
+          this.nextNoteTime = 0;
+          this.bgmSequence = this.build60SecondCircusScore();
+        }
+
+        build60SecondCircusScore() {
+          // 25 bars × 16 steps = 400 steps × 0.150s = EXACTLY 60.000 seconds per loop
+          const N = {
+            _: 0,
+            G2: 98.00, A2: 110.00, B2: 123.47,
+            C3: 130.81, D3: 146.83, E3: 164.81, F3: 174.61, FS3: 185.00, G3: 196.00, A3: 220.00, AS3: 233.08, B3: 246.94,
+            C4: 261.63, D4: 293.66, E4: 329.63, F4: 349.23, FS4: 369.99, G4: 392.00, A4: 440.00, AS4: 466.16, B4: 493.88,
+            C5: 523.25, CS5: 554.37, D5: 587.33, DS5: 622.25, E5: 659.25, F5: 698.46, FS5: 739.99, G5: 783.99, GS5: 830.61, A5: 880.00, AS5: 932.33, B5: 987.77,
+            C6: 1046.50, D6: 1174.66, E6: 1318.51, F6: 1396.91, G6: 1567.98
+          };
+
+          const phrasesM = {
+            A1: [N.C5, N.E5, N.G5, N.E5, N.A5, N.G5, N.F5, N.E5, N.D5, N.F5, N.A5, N.F5, N.G5, N.E5, N.C5, N.D5],
+            A2: [N.E5, N.G5, N.C6, N.B5, N.A5, N.G5, N.FS5, N.G5, N.A5, N.F5, N.D5, N.G5, N.C5, N._,  N.G5, N._ ],
+            A3: [N.C6, N.B5, N.AS5, N.A5, N.GS5, N.G5, N.FS5, N.F5, N.E5, N.G5, N.C6, N.G5, N.E5, N.C5, N.D5, N.E5],
+            A4: [N.F5, N.A5, N.D6, N.C6, N.B5, N.G5, N.A5, N.B5, N.C6, N.G5, N.E5, N.G5, N.C6, N._,  N.C6, N._ ],
+
+            B1: [N.G5, N.B5, N.D6, N.B5, N.A5, N.FS5, N.D5, N.FS5, N.G5, N.B5, N.D6, N.B5, N.A5, N.D6, N.B5, N.G5],
+            B2: [N.E5, N.FS5, N.G5, N.A5, N.B5, N.D6, N.C6, N.A5, N.G5, N.B5, N.A5, N.FS5, N.G5, N.D5, N.G5, N._ ],
+            B3: [N.B5, N.G5, N.D5, N.G5, N.C6, N.A5, N.FS5, N.A5, N.B5, N.G5, N.E5, N.G5, N.A5, N.FS5, N.D5, N._ ],
+            B4: [N.G5, N.A5, N.B5, N.C6, N.D6, N.B5, N.G5, N.D6, N.C6, N.A5, N.FS5, N.D5, N.G5, N._,  N.G4, N.B4],
+
+            C1: [N.F5, N.A5, N.C6, N.A5, N.AS5, N.D6, N.C6, N.A5, N.G5, N.AS5, N.E5, N.G5, N.F5, N.C5, N.D5, N.E5],
+            C2: [N.F5, N.A5, N.C6, N.F6, N.E6, N.D6, N.C6, N.AS5, N.A5, N.C6, N.G5, N.E5, N.F5, N._,  N.C5, N._ ],
+            C3: [N.D5, N.F5, N.A5, N.D6, N.C6, N.A5, N.F5, N.A5, N.G5, N.AS5, N.D6, N.C6, N.AS5, N.G5, N.E5, N.C5],
+            C4: [N.F5, N.G5, N.A5, N.AS5, N.C6, N.D6, N.C6, N.A5, N.G5, N.C6, N.AS5, N.E5, N.F5, N._,  N.G5, N._ ],
+
+            D1: [N.C6, N.G5, N.E5, N.G5, N.C6, N.D6, N.E6, N.C6, N.D6, N.B5, N.G5, N.B5, N.D6, N.E6, N.F6, N.D6],
+            D2: [N.E6, N.C6, N.G5, N.E5, N.A5, N.C6, N.F6, N.D6, N.C6, N.G5, N.B5, N.D6, N.C6, N._,  N.G5, N._ ],
+            D3: [N.E5, N.F5, N.FS5, N.G5, N.A5, N.AS5, N.B5, N.C6, N.D6, N.B5, N.G5, N.F5, N.E5, N.G5, N.C6, N.E6],
+            D4: [N.D6, N.C6, N.B5, N.A5, N.G5, N.F5, N.E5, N.D5, N.C5, N.G5, N.E5, N.C6, N.G5, N.B5, N.C6, N._ ]
+          };
+
+          const phrasesB = {
+            A1: [N.C3, N.C4, N.G2, N.C4, N.C3, N.C4, N.G2, N.C4, N.D3, N.B3, N.G2, N.B3, N.C3, N.C4, N.G2, N.B2],
+            A2: [N.C3, N.C4, N.E3, N.C4, N.F3, N.C4, N.D3, N.C4, N.G3, N.B3, N.G2, N.B3, N.C3, N.G2, N.C3, N._ ],
+            A3: [N.C3, N.C4, N.G2, N.C4, N.C3, N.C4, N.G2, N.C4, N.C3, N.C4, N.E3, N.C4, N.G3, N.B3, N.D3, N.G2],
+            A4: [N.F3, N.A3, N.D3, N.A3, N.G3, N.B3, N.G2, N.B3, N.C3, N.G3, N.E3, N.G3, N.C3, N._,  N.G2, N._ ],
+
+            B1: [N.G2, N.B3, N.D3, N.B3, N.D3, N.A3, N.A2, N.A3, N.G2, N.B3, N.D3, N.B3, N.D3, N.A3, N.G2, N.B3],
+            B2: [N.C3, N.G3, N.E3, N.G3, N.G2, N.B3, N.A2, N.C4, N.D3, N.A3, N.D3, N.FS3, N.G2, N.D3, N.G2, N._ ],
+            B3: [N.G2, N.B3, N.D3, N.B3, N.D3, N.A3, N.FS3, N.A3, N.E3, N.B3, N.B2, N.G3, N.D3, N.A3, N.D3, N.C3],
+            B4: [N.B2, N.G3, N.D3, N.G3, N.G2, N.B3, N.B2, N.G3, N.D3, N.A3, N.A2, N.FS3, N.G2, N._,  N.G2, N._ ],
+
+            C1: [N.F3, N.A3, N.C3, N.A3, N.AS3, N.D4, N.F3, N.C4, N.C3, N.AS3, N.G2, N.AS3, N.F3, N.A3, N.C3, N.G3],
+            C2: [N.F3, N.A3, N.C3, N.A3, N.AS3, N.D4, N.G3, N.AS3, N.C3, N.A3, N.C3, N.G3, N.F3, N.C3, N.F3, N._ ],
+            C3: [N.D3, N.A3, N.A2, N.A3, N.F3, N.C4, N.C3, N.A3, N.G3, N.AS3, N.D3, N.G3, N.C3, N.G3, N.C3, N.E3],
+            C4: [N.F3, N.A3, N.C3, N.A3, N.F3, N.C4, N.A2, N.C4, N.C3, N.AS3, N.C3, N.G3, N.F3, N._,  N.G2, N._ ],
+
+            D1: [N.C3, N.C4, N.G2, N.C4, N.C3, N.C4, N.E3, N.C4, N.G2, N.B3, N.D3, N.B3, N.G2, N.B3, N.B2, N.G3],
+            D2: [N.C3, N.C4, N.E3, N.C4, N.F3, N.C4, N.D3, N.A3, N.G2, N.B3, N.G2, N.B3, N.C3, N.G2, N.C3, N._ ],
+            D3: [N.C3, N.G3, N.E3, N.G3, N.F3, N.A3, N.FS3, N.A3, N.G3, N.B3, N.D3, N.B3, N.C3, N.G3, N.E3, N.C3],
+            D4: [N.G2, N.B3, N.D3, N.B3, N.G2, N.B3, N.B2, N.G3, N.C3, N.G2, N.E3, N.C3, N.G2, N.G2, N.C3, N._ ]
+          };
+
+          const barOrder = [
+            'A1', 'A2', 'A1', 'A3', 'A1', 'A4',
+            'B1', 'B2', 'B3', 'B4', 'B1', 'B2',
+            'C1', 'C2', 'C3', 'C4', 'C1', 'C2',
+            'D1', 'D2', 'D3', 'D4', 'A1', 'D3', 'D4'
+          ];
+
+          const melody = [];
+          const bass = [];
+          barOrder.forEach((key) => {
+            melody.push(...phrasesM[key]);
+            bass.push(...phrasesB[key]);
+          });
+          return { melody, bass, stepSec: 0.150 };
         }
 
         init() {
@@ -239,11 +340,27 @@
             const AudioCtx = window.AudioContext || window.webkitAudioContext;
             if (AudioCtx) {
               this.ctx = new AudioCtx();
+              this.compressor = this.ctx.createDynamicsCompressor();
+              this.compressor.threshold.setValueAtTime(-16, this.ctx.currentTime);
+              this.compressor.knee.setValueAtTime(18, this.ctx.currentTime);
+              this.compressor.ratio.setValueAtTime(6, this.ctx.currentTime);
+              this.compressor.attack.setValueAtTime(0.003, this.ctx.currentTime);
+              this.compressor.release.setValueAtTime(0.18, this.ctx.currentTime);
+
+              this.masterGain = this.ctx.createGain();
+              this.masterGain.gain.setValueAtTime(0.92, this.ctx.currentTime);
+
+              this.compressor.connect(this.masterGain);
+              this.masterGain.connect(this.ctx.destination);
             }
           }
           if (this.ctx && this.ctx.state === 'suspended') {
             this.ctx.resume();
           }
+        }
+
+        getOutputNode() {
+          return this.compressor || (this.ctx ? this.ctx.destination : null);
         }
 
         toggleMute() {
@@ -260,100 +377,108 @@
           }
         }
 
+        scheduleBGMNote(stepIdx, time) {
+          const out = this.getOutputNode();
+          if (!out || !this.ctx) return;
+
+          const { melody, bass } = this.bgmSequence;
+          const idx = stepIdx % melody.length; // 0..399
+          const barIdx = Math.floor(idx / 16);
+          const isTrio = barIdx >= 12 && barIdx < 18;
+          const isFinale = barIdx >= 18;
+
+          const mFreq = melody[idx];
+          if (mFreq > 0) {
+            const osc = this.ctx.createOscillator();
+            const sub = this.ctx.createOscillator();
+            const gain = this.ctx.createGain();
+            osc.type = isTrio ? 'sine' : 'triangle';
+            sub.type = isFinale ? 'triangle' : 'sine';
+            osc.frequency.setValueAtTime(mFreq, time);
+            sub.frequency.setValueAtTime(mFreq * 2, time);
+
+            const peak = isFinale ? 0.050 : 0.042;
+            gain.gain.setValueAtTime(0.0008, time);
+            gain.gain.linearRampToValueAtTime(peak, time + 0.012);
+            gain.gain.exponentialRampToValueAtTime(0.0008, time + 0.135);
+
+            osc.connect(gain);
+            sub.connect(gain);
+            gain.connect(out);
+            osc.start(time);
+            sub.start(time);
+            osc.stop(time + 0.145);
+            sub.stop(time + 0.145);
+
+            if ((isTrio || isFinale) && idx % 4 === 0) {
+              const bell = this.ctx.createOscillator();
+              const bGain = this.ctx.createGain();
+              bell.type = 'sine';
+              bell.frequency.setValueAtTime(mFreq * 2, time);
+              bGain.gain.setValueAtTime(0.016, time);
+              bGain.gain.exponentialRampToValueAtTime(0.0006, time + 0.21);
+              bell.connect(bGain);
+              bGain.connect(out);
+              bell.start(time);
+              bell.stop(time + 0.22);
+            }
+          }
+
+          const bFreq = bass[idx];
+          if (bFreq > 0) {
+            const bOsc = this.ctx.createOscillator();
+            const bGain = this.ctx.createGain();
+            const isOffbeat = idx % 2 === 1;
+            bOsc.type = isOffbeat ? 'square' : 'triangle';
+            bOsc.frequency.setValueAtTime(bFreq, time);
+
+            bGain.gain.setValueAtTime(0.0008, time);
+            bGain.gain.linearRampToValueAtTime(isOffbeat ? 0.018 : 0.036, time + 0.009);
+            bGain.gain.exponentialRampToValueAtTime(0.0008, time + 0.115);
+
+            bOsc.connect(bGain);
+            bGain.connect(out);
+            bOsc.start(time);
+            bOsc.stop(time + 0.125);
+          }
+        }
+
         startBGM() {
           this.init();
           if (!this.ctx || this.muted || this.bgmPlaying) return;
           this.bgmPlaying = true;
+          this.nextNoteTime = this.ctx.currentTime + 0.04;
 
-          // Upbeat Circus / Calliope Oom-Pah Rhythm Sequence
-          const melodyNotes = [
-            523.25, 659.25, 783.99, 659.25,
-            880.00, 783.99, 698.46, 659.25,
-            587.33, 698.46, 880.00, 698.46,
-            783.99, 659.25, 523.25, 587.33,
-            523.25, 659.25, 783.99, 1046.50,
-            987.77, 880.00, 783.99, 659.25,
-            587.33, 783.99, 698.46, 587.33,
-            523.25, 0,      1046.50, 0
-          ];
+          const lookaheadMs = 35;
+          const scheduleAheadSec = 0.14;
 
-          const bassNotes = [
-            130.81, 261.63, 196.00, 261.63,
-            146.83, 293.66, 196.00, 293.66,
-            146.83, 293.66, 196.00, 293.66,
-            130.81, 261.63, 196.00, 246.94,
-            130.81, 261.63, 196.00, 261.63,
-            174.61, 349.23, 220.00, 349.23,
-            196.00, 392.00, 146.83, 293.66,
-            130.81, 196.00, 130.81, 0
-          ];
-
-          const tick = () => {
+          const scheduler = () => {
             if (!this.bgmPlaying || this.muted || !this.ctx) return;
-            const now = this.ctx.currentTime;
-            const idx = this.stepIndex % melodyNotes.length;
-
-            const mFreq = melodyNotes[idx];
-            if (mFreq > 0) {
-              const osc = this.ctx.createOscillator();
-              const sub = this.ctx.createOscillator();
-              const gain = this.ctx.createGain();
-              osc.type = 'triangle';
-              sub.type = 'sine';
-              osc.frequency.setValueAtTime(mFreq, now);
-              sub.frequency.setValueAtTime(mFreq * 2, now);
-
-              gain.gain.setValueAtTime(0.001, now);
-              gain.gain.linearRampToValueAtTime(0.045, now + 0.015);
-              gain.gain.exponentialRampToValueAtTime(0.001, now + 0.14);
-
-              osc.connect(gain);
-              sub.connect(gain);
-              gain.connect(this.ctx.destination);
-              osc.start(now);
-              sub.start(now);
-              osc.stop(now + 0.15);
-              sub.stop(now + 0.15);
+            while (this.nextNoteTime < this.ctx.currentTime + scheduleAheadSec) {
+              this.scheduleBGMNote(this.stepIndex, this.nextNoteTime);
+              this.nextNoteTime += this.bgmSequence.stepSec;
+              this.stepIndex = (this.stepIndex + 1) % this.bgmSequence.melody.length;
             }
-
-            const bFreq = bassNotes[idx];
-            if (bFreq > 0) {
-              const bOsc = this.ctx.createOscillator();
-              const bGain = this.ctx.createGain();
-              const isOffbeat = idx % 2 === 1;
-              bOsc.type = isOffbeat ? 'square' : 'triangle';
-              bOsc.frequency.setValueAtTime(bFreq, now);
-
-              bGain.gain.setValueAtTime(0.001, now);
-              bGain.gain.linearRampToValueAtTime(isOffbeat ? 0.02 : 0.038, now + 0.01);
-              bGain.gain.exponentialRampToValueAtTime(0.001, now + 0.12);
-
-              bOsc.connect(bGain);
-              bGain.connect(this.ctx.destination);
-              bOsc.start(now);
-              bOsc.stop(now + 0.13);
-            }
-
-            this.stepIndex++;
-            this.bgmTimer = setTimeout(tick, 165);
           };
 
-          tick();
+          this.schedulerId = setInterval(scheduler, lookaheadMs);
+          scheduler();
         }
 
         stopBGM() {
           this.bgmPlaying = false;
-          if (this.bgmTimer) {
-            clearTimeout(this.bgmTimer);
-            this.bgmTimer = null;
+          if (this.schedulerId) {
+            clearInterval(this.schedulerId);
+            this.schedulerId = null;
           }
         }
 
-        // Subtle physical air-swish when tossing jade bangle (NO cartoon pitch slide)
+        // Physical air-swish when tossing jade bangle (zero cartoon pitch slide)
         playToss() {
-          if (this.muted || !this.ctx) return;
+          const out = this.getOutputNode();
+          if (this.muted || !this.ctx || !out) return;
           const now = this.ctx.currentTime;
-          const dur = 0.13;
+          const dur = 0.12;
           const bufferSize = Math.floor(this.ctx.sampleRate * dur);
           const buffer = this.ctx.createBuffer(1, bufferSize, this.ctx.sampleRate);
           const data = buffer.getChannelData(0);
@@ -366,67 +491,67 @@
 
           const filter = this.ctx.createBiquadFilter();
           filter.type = 'bandpass';
-          filter.frequency.setValueAtTime(750, now);
-          filter.Q.setValueAtTime(2.2, now);
+          filter.frequency.setValueAtTime(780, now);
+          filter.Q.setValueAtTime(2.3, now);
 
           const gain = this.ctx.createGain();
-          gain.gain.setValueAtTime(0.09, now);
+          gain.gain.setValueAtTime(0.085, now);
           gain.gain.exponentialRampToValueAtTime(0.001, now + dur);
 
           noise.connect(filter);
           filter.connect(gain);
-          gain.connect(this.ctx.destination);
+          gain.connect(out);
           noise.start(now);
         }
 
-        // Crisp Jade Ring Hit chime (crystalline bell resonance)
-        playHit(isBonus = false) {
-          if (this.muted || !this.ctx) return;
+        // Crisp Jade-on-Wood Collar Clack + Crystalline Chime on Hit
+        playHit(isBonus = false, streak = 1) {
+          const out = this.getOutputNode();
+          if (this.muted || !this.ctx || !out) return;
           const now = this.ctx.currentTime;
 
-          // First: physical jade-on-wood clack when the bangle collars the prize
+          // Physical jade-on-wood collar clack
           const clackOsc = this.ctx.createOscillator();
           const clackGain = this.ctx.createGain();
           clackOsc.type = 'sine';
-          clackOsc.frequency.setValueAtTime(1920, now);
+          clackOsc.frequency.setValueAtTime(1960, now);
           clackGain.gain.setValueAtTime(0.18, now);
-          clackGain.gain.exponentialRampToValueAtTime(0.001, now + 0.045);
+          clackGain.gain.exponentialRampToValueAtTime(0.001, now + 0.042);
           clackOsc.connect(clackGain);
-          clackGain.connect(this.ctx.destination);
+          clackGain.connect(out);
           clackOsc.start(now);
-          clackOsc.stop(now + 0.05);
+          clackOsc.stop(now + 0.048);
 
-          // Second: bright celebratory chime
+          // Harmonic chime (slight pitch sparkle boost on consecutive streaks)
+          const mult = streak >= 3 ? 1.122 : (streak === 2 ? 1.059 : 1.0);
           const notes = isBonus ? [1046.5, 1318.5, 1567.98, 2093.0] : [1046.5, 1318.5, 1567.98];
           notes.forEach((freq, i) => {
             const osc = this.ctx.createOscillator();
             const gain = this.ctx.createGain();
             osc.type = 'sine';
-            osc.frequency.setValueAtTime(freq, now + 0.02 + i * 0.05);
-            gain.gain.setValueAtTime(0.14, now + 0.02 + i * 0.05);
-            gain.gain.exponentialRampToValueAtTime(0.001, now + 0.02 + i * 0.05 + 0.36);
+            osc.frequency.setValueAtTime(freq * mult, now + 0.02 + i * 0.048);
+            gain.gain.setValueAtTime(0.135, now + 0.02 + i * 0.048);
+            gain.gain.exponentialRampToValueAtTime(0.0008, now + 0.02 + i * 0.048 + 0.36);
             osc.connect(gain);
-            gain.connect(this.ctx.destination);
-            osc.start(now + 0.02 + i * 0.05);
-            osc.stop(now + 0.02 + i * 0.05 + 0.38);
+            gain.connect(out);
+            osc.start(now + 0.02 + i * 0.048);
+            osc.stop(now + 0.02 + i * 0.048 + 0.38);
           });
         }
 
-        // REALISTIC JADE BANGLE SHATTER SOUND (Physical Modal Synthesis + Crystalline Fracture)
-        // Strictly NO frequency slides / pitch bends — uses fixed high-frequency modal resonances
-        // and multi-stage shard scatter transients that sound like real jade/porcelain shattering.
+        // REALISTIC PHYSICAL JADE BANGLE SHATTER (Zero pitch slides, modal crystal synthesis)
         playShatter() {
-          if (this.muted || !this.ctx) return;
+          const out = this.getOutputNode();
+          if (this.muted || !this.ctx || !out) return;
           const now = this.ctx.currentTime;
           const sr = this.ctx.sampleRate;
 
-          // Stage 1: Hard Initial Crack Impulse (Jade striking hardwood shelf/floor)
+          // Stage 1: Hard initial fracture transient
           const crackDur = 0.045;
           const crackLen = Math.floor(sr * crackDur);
           const crackBuf = this.ctx.createBuffer(1, crackLen, sr);
           const crackData = crackBuf.getChannelData(0);
           for (let i = 0; i < crackLen; i++) {
-            // Ultra-sharp transient burst with micro-crackles
             const env = Math.exp(-i / (sr * 0.006));
             const crackle = Math.random() > 0.35 ? 1.0 : 0.2;
             crackData[i] = (Math.random() * 2 - 1) * env * crackle;
@@ -436,7 +561,7 @@
 
           const hpFilter = this.ctx.createBiquadFilter();
           hpFilter.type = 'highpass';
-          hpFilter.frequency.setValueAtTime(2200, now);
+          hpFilter.frequency.setValueAtTime(2250, now);
 
           const crackGain = this.ctx.createGain();
           crackGain.gain.setValueAtTime(0.55, now);
@@ -444,22 +569,22 @@
 
           crackSrc.connect(hpFilter);
           hpFilter.connect(crackGain);
-          crackGain.connect(this.ctx.destination);
+          crackGain.connect(out);
           crackSrc.start(now);
 
-          // Subtle low-mid hardwood impact thud at t=0
+          // Hardwood surface impact thud
           const woodOsc = this.ctx.createOscillator();
           const woodGain = this.ctx.createGain();
           woodOsc.type = 'sine';
-          woodOsc.frequency.setValueAtTime(165, now);
+          woodOsc.frequency.setValueAtTime(162, now);
           woodGain.gain.setValueAtTime(0.24, now);
           woodGain.gain.exponentialRampToValueAtTime(0.001, now + 0.032);
           woodOsc.connect(woodGain);
-          woodGain.connect(this.ctx.destination);
+          woodGain.connect(out);
           woodOsc.start(now);
-          woodOsc.stop(now + 0.035);
+          woodOsc.stop(now + 0.036);
 
-          // Stage 2: Primary Jade Fracture Modal Ring (Fixed inharmonic crystal modes at impact)
+          // Stage 2: Fixed high-frequency jade crystal fracture modes
           const primaryModes = [
             { freq: 3180, amp: 0.16, decay: 0.045 },
             { freq: 4460, amp: 0.15, decay: 0.038 },
@@ -471,27 +596,24 @@
             const osc = this.ctx.createOscillator();
             const g = this.ctx.createGain();
             osc.type = 'sine';
-            // Fixed modal frequency (zero pitch slide!)
-            osc.frequency.setValueAtTime(m.freq + (Math.random() - 0.5) * 80, now);
+            osc.frequency.setValueAtTime(m.freq + (Math.random() - 0.5) * 70, now);
             g.gain.setValueAtTime(m.amp, now);
             g.gain.exponentialRampToValueAtTime(0.0008, now + m.decay);
             osc.connect(g);
-            g.connect(this.ctx.destination);
+            g.connect(out);
             osc.start(now);
             osc.stop(now + m.decay + 0.005);
           });
 
-          // Stage 3: Cascading Broken Jade Shards Hitting & Skittering on the Floor (14 micro-impacts)
+          // Stage 3: 14 cascading jade shard skitter clicks
           const shardCount = 14;
           for (let s = 0; s < shardCount; s++) {
-            // Shards land tightly right after main break, then trail off over 280ms
             const delay = 0.008 + Math.pow(s / shardCount, 1.45) * 0.26 + Math.random() * 0.015;
             const tStart = now + delay;
             const distanceAtten = Math.pow(1 - s / (shardCount + 2), 1.3);
 
-            // Each shard has 2 fixed high-pitched crystalline modes + a tiny crisp click transient
             const baseFreq = 3400 + Math.random() * 4800;
-            const modeRatios = [1.0, 1.414]; // Inharmonic crystal plate ratio
+            const modeRatios = [1.0, 1.414];
             const ringDur = 0.018 + Math.random() * 0.032;
 
             modeRatios.forEach((ratio, rIdx) => {
@@ -505,12 +627,11 @@
               sGain.gain.exponentialRampToValueAtTime(0.0005, tStart + ringDur);
 
               sOsc.connect(sGain);
-              sGain.connect(this.ctx.destination);
+              sGain.connect(out);
               sOsc.start(tStart);
               sOsc.stop(tStart + ringDur + 0.004);
             });
 
-            // Tiny high-frequency shard click noise (4ms)
             const clickSamples = Math.floor(sr * 0.005);
             const clickBuf = this.ctx.createBuffer(1, clickSamples, sr);
             const cData = clickBuf.getChannelData(0);
@@ -527,14 +648,15 @@
             cGain.gain.setValueAtTime(0.22 * distanceAtten, tStart);
             cSrc.connect(cBp);
             cBp.connect(cGain);
-            cGain.connect(this.ctx.destination);
+            cGain.connect(out);
             cSrc.start(tStart);
           }
         }
 
-        // Firework explosion sound (realistic pyrotechnic pop + crackle, no cartoon slide)
+        // Pyrotechnic firework burst
         playFirework() {
-          if (this.muted || !this.ctx) return;
+          const out = this.getOutputNode();
+          if (this.muted || !this.ctx || !out) return;
           const now = this.ctx.currentTime;
           const sr = this.ctx.sampleRate;
           const dur = 0.26;
@@ -550,11 +672,11 @@
           lp.type = 'lowpass';
           lp.frequency.setValueAtTime(950, now);
           const gain = this.ctx.createGain();
-          gain.gain.setValueAtTime(0.18, now);
+          gain.gain.setValueAtTime(0.16, now);
           gain.gain.exponentialRampToValueAtTime(0.001, now + dur);
           src.connect(lp);
           lp.connect(gain);
-          gain.connect(this.ctx.destination);
+          gain.connect(out);
           src.start(now);
         }
       }
@@ -562,31 +684,42 @@
       const sound = new SoundSystem();
 
       // ==========================================
-      // 2. LEVEL CONFIGURATIONS (Levels 1 to 10)
+      // 2. 20-LEVEL CONFIGURATIONS (Internal Difficulty 10% + 3%/level, Capped Total Bangles <= totalItems)
       // ==========================================
-      // 關1–3：3 排 × 3 個物品（慢速）
-      // 關4–6：4 排 × 8–12 個物品
-      // 關7–10：5 排 × 15–20 個物品
-      // 移動方式統一為緩慢左右交叉移動。
-      const LEVEL_CONFIGS = [
-        { level: 1,  rows: 3, totalItems: 9,  perRow: [3, 3, 3],       baseSpeed: 26, bonusCount: 2 },
-        { level: 2,  rows: 3, totalItems: 9,  perRow: [3, 3, 3],       baseSpeed: 30, bonusCount: 2 },
-        { level: 3,  rows: 3, totalItems: 9,  perRow: [3, 3, 3],       baseSpeed: 34, bonusCount: 2 },
-        { level: 4,  rows: 4, totalItems: 8,  perRow: [2, 2, 2, 2],    baseSpeed: 32, bonusCount: 2 },
-        { level: 5,  rows: 4, totalItems: 10, perRow: [2, 3, 2, 3],    baseSpeed: 36, bonusCount: 2 },
-        { level: 6,  rows: 4, totalItems: 12, perRow: [3, 3, 3, 3],    baseSpeed: 40, bonusCount: 3 },
-        { level: 7,  rows: 5, totalItems: 15, perRow: [3, 3, 3, 3, 3], baseSpeed: 38, bonusCount: 3 },
-        { level: 8,  rows: 5, totalItems: 17, perRow: [3, 3, 4, 3, 4], baseSpeed: 42, bonusCount: 3 },
-        { level: 9,  rows: 5, totalItems: 19, perRow: [3, 4, 4, 4, 4], baseSpeed: 46, bonusCount: 3 },
-        { level: 10, rows: 5, totalItems: 20, perRow: [4, 4, 4, 4, 4], baseSpeed: 50, bonusCount: 4 }
-      ];
+      const LEVEL_CONFIGS = Array.from({ length: 20 }, (_, i) => {
+        const level = i + 1;
+        const difficultyPct = 10 + i * 3; // 10%, 13%, 16% ... 67% (strictly internal)
+        let perRow;
+        let bonusList;
+        // Strict invariant: 5 + sum(bonusList) <= totalItems, zero +1 props, +5 from Level 5+
+        if (level <= 3) {
+          perRow = [3, 3, 3]; // 9 items
+          bonusList = level === 1 ? [2] : (level === 2 ? [3] : [2, 2]);
+        } else if (level === 4) {
+          perRow = [2, 3, 2, 3]; // 10 items
+          bonusList = [2, 3];
+        } else if (level <= 8) {
+          perRow = [3, 3, 3, 3]; // 12 items
+          bonusList = [5, 2];
+        } else if (level <= 12) {
+          perRow = [3, 3, 3, 3, 3]; // 15 items
+          bonusList = [5, 2, 3];
+        } else if (level <= 16) {
+          perRow = [3, 4, 3, 4, 3]; // 17 items
+          bonusList = [5, 2, 2, 3];
+        } else {
+          perRow = [4, 4, 4, 4, 4]; // 20 items
+          bonusList = [5, 2, 2, 3, 3];
+        }
+        const rows = perRow.length;
+        const totalItems = perRow.reduce((a, b) => a + b, 0);
+        const baseSpeed = 24 * (1 + (difficultyPct - 10) / 35);
+        return { level, difficultyPct, rows, totalItems, perRow, baseSpeed, bonusList };
+      });
 
       // ==========================================
       // 3. ENLARGED, HIGH-DETAIL TOY CATALOG BY SHELF TIER
       // ==========================================
-      // 上層：大型絨毛玩偶、巨型公仔、發光玩具
-      // 中層：中型娃娃、小汽車、公仔、毛絨動物
-      // 下層：小型鑰匙圈、迷你玩具、糖果盒
       const TOY_TIERS = {
         top: [
           { type: 'teddy_giant',   name: '巨型泰迪熊',   scale: 1.22, glow: false },
@@ -609,7 +742,7 @@
       };
 
       // ==========================================
-      // 4. GAME STATE & ENTITIES
+      // 4. GAME STATE, TIMERS & CAMERA JUICE
       // ==========================================
       const canvas = document.getElementById('game-canvas');
       const ctx = canvas.getContext('2d');
@@ -619,11 +752,21 @@
       let dpr = Math.min(window.devicePixelRatio || 1, 2);
 
       let gameState = 'HOME'; // 'HOME', 'PLAYING', 'CLEAR', 'RETRY', 'VICTORY'
-      let currentLevelIndex = 0; // 0 to 9
-      let banglesLeft = 3;
+      let currentLevelIndex = 0; // 0..19
+      let banglesLeft = 5;
       let hitsThisLevel = 0;
       let totalHitsAllLevels = 0;
+      let consecutiveHits = 0;
       let globalTime = 0;
+
+      // Tracked timers so zero stale callbacks ever fire across state transitions
+      let roundEndTimer = null;
+      let victoryFireworkTimer = null;
+
+      // Damped screen micro-shake & tap landing ripples
+      let shakeTime = 0;
+      let shakeIntensity = 0;
+      let tapRipples = [];
 
       let shelfRows = [];
       let items = [];
@@ -635,35 +778,64 @@
       let ambientDust = [];
       let distantBokeh = [];
 
-      // Drag/Flick or Tap Aiming state
-      let pointerDown = false;
+      // Single-pointer tracking (prevents multi-touch / palm touch lockups on iPhone)
+      let activePointerId = null;
       let pointerStart = { x: 0, y: 0, time: 0 };
       let pointerCurr = { x: 0, y: 0 };
       let isDraggingAim = false;
 
+      // Enlarged +30% Jade Bangle dimensions
+      const BANGLE_BASE_RX = 47;
+      const BANGLE_BASE_RY = 29;
+      const BANGLE_STACK_RX = 26;
+      const BANGLE_STACK_RY = 16;
+
+      function clearPendingTimers() {
+        if (roundEndTimer !== null) {
+          clearTimeout(roundEndTimer);
+          roundEndTimer = null;
+        }
+        if (victoryFireworkTimer !== null) {
+          clearTimeout(victoryFireworkTimer);
+          victoryFireworkTimer = null;
+        }
+      }
+
+      function triggerMicroShake(intensity, duration) {
+        shakeIntensity = Math.max(shakeIntensity, intensity);
+        shakeTime = Math.max(shakeTime, duration);
+      }
+
+      function pulseHudPill(id) {
+        const el = document.getElementById(id);
+        if (!el) return;
+        el.classList.remove('hud-pulse');
+        void el.offsetWidth;
+        el.classList.add('hud-pulse');
+      }
+
       // ==========================================
-      // 5. INITIALIZATION & LEVEL BUILDER
+      // 5. GEOMETRY & NON-DESTRUCTIVE RESIZE SYSTEM
       // ==========================================
       function initAtmosphereParticles() {
         ambientDust = [];
-        for (let i = 0; i < 36; i++) {
+        for (let i = 0; i < 38; i++) {
           ambientDust.push({
             x: Math.random() * width,
             y: Math.random() * height * 0.84,
             r: 1.0 + Math.random() * 2.2,
-            vx: (Math.random() - 0.5) * 10,
+            vx: (Math.random() - 0.5) * 9,
             vy: -4 - Math.random() * 8,
             alpha: 0.25 + Math.random() * 0.5,
             phase: Math.random() * Math.PI * 2
           });
         }
 
-        // Distant night market street bokeh lights behind the stall
         distantBokeh = [];
         const bokehColors = [
-          'rgba(255, 190, 95, 0.22)',
+          'rgba(255, 192, 95, 0.22)',
           'rgba(255, 110, 55, 0.18)',
-          'rgba(255, 230, 150, 0.20)',
+          'rgba(255, 232, 155, 0.20)',
           'rgba(235, 65, 50, 0.16)'
         ];
         for (let i = 0; i < 18; i++) {
@@ -677,48 +849,111 @@
         }
       }
 
+      function getBoothInnerBounds() {
+        const stallLeft = width * 0.052;
+        const stallRight = width * 0.948;
+        const pillarW = 18;
+        return {
+          stallLeft,
+          stallRight,
+          pillarW,
+          innerLeft: stallLeft + pillarW - 2,
+          innerRight: stallRight - pillarW + 2
+        };
+      }
+
+      function computeShelfLayout(rowCount) {
+        const { stallLeft, stallRight, innerLeft, innerRight } = getBoothInnerBounds();
+        const shelfTopY = height * 0.265;
+        const shelfBottomY = height * 0.680;
+        const rowSpan = rowCount > 1 ? (shelfBottomY - shelfTopY) / (rowCount - 1) : (height * 0.16);
+
+        // Track padding strictly exceeds max toy visual half-width + glow aura (~84px) so every toy
+        // and +2/+3/+5 token is 100% hidden behind the solid side pillars before wrapping around.
+        const hidePad = Math.max(82, Math.min(width * 0.22, 94));
+
+        const layouts = [];
+        for (let r = 0; r < rowCount; r++) {
+          const y = rowCount === 1 ? (shelfTopY + shelfBottomY) * 0.5 : shelfTopY + r * rowSpan;
+          const depthRatio = r / Math.max(1, rowCount - 1);
+          const boardLeft = stallLeft + 4;
+          const boardRight = stallRight - 4;
+          // Vertical compartment ceiling: strictly below the front lip of the shelf above
+          const clipTop = r === 0 ? height * 0.150 : (y - rowSpan + 16);
+          const clipBottom = y + 10;
+          layouts.push({
+            y,
+            rowSpan,
+            depthRatio,
+            boardLeft,
+            boardRight,
+            innerLeft,
+            innerRight,
+            clipTop,
+            clipBottom,
+            left: innerLeft - hidePad,
+            right: innerRight + hidePad
+          });
+        }
+        return layouts;
+      }
+
       function setupLevel(levelIdx) {
-        currentLevelIndex = Math.max(0, Math.min(9, levelIdx));
+        clearPendingTimers();
+        currentLevelIndex = Math.max(0, Math.min(19, levelIdx));
         const cfg = LEVEL_CONFIGS[currentLevelIndex];
 
-        // Fixed 3 jade bangles per level, no carry-over across levels
-        banglesLeft = 3;
+        banglesLeft = 5;
         hitsThisLevel = 0;
+        consecutiveHits = 0;
         activeBangles = [];
         jadeShards = [];
         particles = [];
         floatingTexts = [];
+        tapRipples = [];
+        activePointerId = null;
+        isDraggingAim = false;
 
         updateHUD();
 
-        const stallLeft = width * 0.055;
-        const stallRight = width * 0.945;
-
-        const shelfTopY = height * 0.255;
-        const shelfBottomY = height * 0.675;
         const rowCount = cfg.rows;
-        const rowSpan = rowCount > 1 ? (shelfBottomY - shelfTopY) / (rowCount - 1) : 0;
+        const rowLayouts = computeShelfLayout(rowCount);
 
         shelfRows = [];
         items = [];
 
-        let totalSlots = cfg.perRow.reduce((a, b) => a + b, 0);
-        let bonusIndices = new Set();
-        while (bonusIndices.size < cfg.bonusCount && bonusIndices.size < totalSlots - 2) {
-          bonusIndices.add(Math.floor(Math.random() * totalSlots));
+        const totalSlots = cfg.perRow.reduce((a, b) => a + b, 0);
+        const plannedBonuses = (cfg.bonusList || [2]).slice();
+        const safeBonuses = [];
+        let runningTotalBangles = 5;
+        for (let i = 0; i < plannedBonuses.length; i++) {
+          const val = plannedBonuses[i];
+          if (runningTotalBangles + val <= totalSlots) {
+            safeBonuses.push(val);
+            runningTotalBangles += val;
+          }
         }
+
+        // Distribute bonus props across distinct rows when possible so they aren't clumped together
+        const bonusSlotList = [];
+        const bonusIndices = new Set();
+        while (bonusIndices.size < safeBonuses.length && bonusIndices.size < totalSlots - 1) {
+          const candidate = Math.floor(Math.random() * totalSlots);
+          if (!bonusIndices.has(candidate)) {
+            bonusIndices.add(candidate);
+            bonusSlotList.push(candidate);
+          }
+        }
+
+        const bonusValueMap = new Map();
+        bonusSlotList.forEach((slotIdx, idx) => {
+          bonusValueMap.set(slotIdx, safeBonuses[idx]);
+        });
 
         let slotCounter = 0;
 
         for (let r = 0; r < rowCount; r++) {
-          const y = rowCount === 1 ? (shelfTopY + shelfBottomY) * 0.5 : shelfTopY + r * rowSpan;
-
-          // Perspective narrowing: upper shelves are slightly deeper inside the booth, lower shelves are wider & closer
-          const depthRatio = r / Math.max(1, rowCount - 1); // 0 at top, 1 at bottom
-          const rowInset = (1 - depthRatio) * (width * 0.035);
-          const rowLeft = stallLeft + rowInset + 18;
-          const rowRight = stallRight - rowInset - 18;
-
+          const lay = rowLayouts[r];
           let tierKey = 'middle';
           if (r === 0) {
             tierKey = 'top';
@@ -735,35 +970,43 @@
 
           shelfRows.push({
             rowIndex: r,
-            y: y,
-            depthRatio: depthRatio,
+            y: lay.y,
+            rowSpan: lay.rowSpan,
+            depthRatio: lay.depthRatio,
             tierKey: tierKey,
             speed: speed,
-            left: rowLeft,
-            right: rowRight,
-            boardLeft: stallLeft + rowInset,
-            boardRight: stallRight - rowInset
+            left: lay.left,
+            right: lay.right,
+            boardLeft: lay.boardLeft,
+            boardRight: lay.boardRight,
+            innerLeft: lay.innerLeft,
+            innerRight: lay.innerRight,
+            clipTop: lay.clipTop,
+            clipBottom: lay.clipBottom
           });
 
           const countInRow = cfg.perRow[r];
-          const trackW = rowRight - rowLeft;
-          const spacing = trackW / countInRow;
+          const trackW = lay.right - lay.left;
           const tierCatalog = TOY_TIERS[tierKey];
+          const densityFactor = rowCount === 3 ? 1.0 : (rowCount === 4 ? 0.90 : 0.82);
+          const maxRowRadius = Math.min(width * 0.092, lay.rowSpan * 0.42, 35.5);
 
           for (let c = 0; c < countInRow; c++) {
-            const isBonus = bonusIndices.has(slotCounter);
-            const bonusValue = isBonus ? (c % 3 === 0 ? 3 : (c % 2 === 0 ? 2 : 1)) : 0;
+            const isBonus = bonusValueMap.has(slotCounter);
+            const bonusValue = isBonus ? bonusValueMap.get(slotCounter) : 0;
             const tpl = tierCatalog[(r * 3 + c) % tierCatalog.length];
-
-            // Enlarged toy sizes (~46% larger than previous version so every prize is bold, tactile, and clear!)
-            const densityFactor = rowCount === 3 ? 1.0 : (rowCount === 4 ? 0.90 : 0.82);
-            const baseRadius = Math.min(width * 0.095, 36.5) * tpl.scale * densityFactor;
+            const itemScale = isBonus ? 0.94 : tpl.scale;
+            const baseRadius = maxRowRadius * itemScale * densityFactor;
+            // Normalized track coordinate u in [0, 1) so resizing never resets item positions!
+            const u = (c + 0.5) / countInRow;
 
             items.push({
               id: `item_${r}_${c}`,
               rowIndex: r,
-              x: rowLeft + (c + 0.5) * spacing,
-              y: y,
+              u: u,
+              x: lay.left + u * trackW,
+              y: lay.y,
+              tplScale: itemScale,
               baseRadius: baseRadius,
               toyWidth: baseRadius * 2,
               type: isBonus ? 'bonus_token' : tpl.type,
@@ -772,8 +1015,7 @@
               glow: isBonus || tpl.glow,
               tierKey: tierKey,
               captured: false,
-              captureAnim: 0,
-              ringCollarScale: 1,
+              captureAnim: 0, // 0 -> 1 over 0.55s (0..0.38 collar settle + hop, 0.38..1.0 float out)
               bobPhase: Math.random() * Math.PI * 2
             });
 
@@ -782,24 +1024,57 @@
         }
       }
 
+      // Non-destructive layout rescaler on window/viewport resize (fixes iOS Safari address-bar reset bug!)
+      function rescaleActiveLevelLayout() {
+        const cfg = LEVEL_CONFIGS[currentLevelIndex];
+        if (!cfg || shelfRows.length === 0) {
+          setupLevel(currentLevelIndex);
+          return;
+        }
+        const rowCount = cfg.rows;
+        const rowLayouts = computeShelfLayout(rowCount);
+        const densityFactor = rowCount === 3 ? 1.0 : (rowCount === 4 ? 0.90 : 0.82);
+
+        for (let r = 0; r < shelfRows.length && r < rowLayouts.length; r++) {
+          const lay = rowLayouts[r];
+          shelfRows[r].y = lay.y;
+          shelfRows[r].rowSpan = lay.rowSpan;
+          shelfRows[r].depthRatio = lay.depthRatio;
+          shelfRows[r].left = lay.left;
+          shelfRows[r].right = lay.right;
+          shelfRows[r].boardLeft = lay.boardLeft;
+          shelfRows[r].boardRight = lay.boardRight;
+          shelfRows[r].innerLeft = lay.innerLeft;
+          shelfRows[r].innerRight = lay.innerRight;
+          shelfRows[r].clipTop = lay.clipTop;
+          shelfRows[r].clipBottom = lay.clipBottom;
+        }
+
+        for (let i = 0; i < items.length; i++) {
+          const it = items[i];
+          const row = shelfRows[it.rowIndex];
+          if (!row) continue;
+          const trackW = row.right - row.left;
+          const maxRowRadius = Math.min(width * 0.092, row.rowSpan * 0.42, 35.5);
+          it.x = row.left + it.u * trackW;
+          it.y = row.y;
+          it.baseRadius = maxRowRadius * it.tplScale * densityFactor;
+          it.toyWidth = it.baseRadius * 2;
+        }
+      }
+
       function updateHUD() {
         const lvlEl = document.getElementById('hud-level');
         const bngEl = document.getElementById('hud-bangles');
         const hitEl = document.getElementById('hud-hits');
-        if (lvlEl) lvlEl.textContent = `${currentLevelIndex + 1} / 10`;
+        if (lvlEl) lvlEl.textContent = `${currentLevelIndex + 1} / 20`;
         if (bngEl) bngEl.textContent = `${banglesLeft}`;
         if (hitEl) hitEl.textContent = `${hitsThisLevel}`;
       }
 
       // ==========================================
-      // 6. THROWING & COLLISION MECHANICS (Enlarged +30% Jade Bangle & ±15% Center)
+      // 6. THROWING, 3D DEPTH PHYSICS & ±15% COLLISION
       // ==========================================
-      // Enlarged Jade Bangle base dimensions (+30% from original 36x22 -> 47x29)
-      const BANGLE_BASE_RX = 47;
-      const BANGLE_BASE_RY = 29;
-      const BANGLE_STACK_RX = 26;
-      const BANGLE_STACK_RY = 16;
-
       function getPlayerHandPos() {
         return {
           x: width * 0.5,
@@ -810,16 +1085,31 @@
       function launchBangle(targetX, targetY) {
         if (gameState !== 'PLAYING' || banglesLeft <= 0) return;
 
-        const clampedX = Math.max(width * 0.08, Math.min(width * 0.92, targetX));
+        // Cancel any pending round-end check if a throw occurs
+        if (roundEndTimer !== null) {
+          clearTimeout(roundEndTimer);
+          roundEndTimer = null;
+        }
+
+        const clampedX = Math.max(width * 0.075, Math.min(width * 0.925, targetX));
         const clampedY = Math.max(height * 0.18, Math.min(height * 0.71, targetY));
 
         banglesLeft--;
         updateHUD();
         sound.playToss();
 
+        // Subtle landing target ripple for crisp tactile feedback
+        tapRipples.push({
+          x: clampedX,
+          y: clampedY,
+          r: 6,
+          maxR: 28,
+          alpha: 0.75
+        });
+
         const start = getPlayerHandPos();
         const dist = Math.hypot(clampedX - start.x, clampedY - start.y);
-        const duration = Math.max(0.36, Math.min(0.56, dist / 740));
+        const duration = Math.max(0.34, Math.min(0.54, dist / 760));
 
         activeBangles.push({
           startX: start.x,
@@ -828,16 +1118,22 @@
           targetY: clampedY,
           x: start.x,
           y: start.y,
+          groundY: start.y,
+          arcLift: 0,
           elapsed: 0,
           duration: duration,
           arcHeight: 118 + (start.y - clampedY) * 0.18,
           scale: 1.18,
+          tiltRatio: 0.62,
           rotation: 0
         });
       }
 
       function evaluateBangleLanding(bangle) {
-        // Rule: 判定範圍：物品中心 ±15%
+        const cfg = LEVEL_CONFIGS[currentLevelIndex] || LEVEL_CONFIGS[0];
+        // Smooth internal difficulty scaling from Level 1 (10%) to Level 20 (67%)
+        const diffScale = 1 - (cfg.difficultyPct - 10) * 0.0045;
+
         let matchedItem = null;
         let bestRatio = Infinity;
 
@@ -845,14 +1141,18 @@
           const it = items[i];
           if (it.captured) continue;
 
+          // Only items visibly inside the booth opening (not occluded behind the side pillars) can be collared
+          const row = shelfRows[it.rowIndex];
+          if (row && (it.x < row.innerLeft + 8 || it.x > row.innerRight - 8)) continue;
+
           const centerX = it.x;
           const centerY = it.y - it.baseRadius * 0.35;
           const dx = bangle.targetX - centerX;
           const dy = bangle.targetY - centerY;
           const dist = Math.hypot(dx, dy);
 
-          // ±15% center tolerance scaled to enlarged toy size & 30% larger jade bangle aperture
-          const threshold = Math.max(18, it.toyWidth * 0.15 + 14);
+          // Exact ±15% target center rule scaled gently by internal level difficulty
+          const threshold = Math.max(15, (it.toyWidth * 0.15 + 14) * diffScale);
           const ratio = dist / threshold;
 
           if (dist <= threshold && ratio < bestRatio) {
@@ -863,7 +1163,8 @@
 
         if (matchedItem) {
           matchedItem.captured = true;
-          matchedItem.captureAnim = 0.01;
+          matchedItem.captureAnim = 0.001;
+          consecutiveHits++;
 
           const hitX = matchedItem.x;
           const hitY = matchedItem.y - matchedItem.baseRadius * 0.35;
@@ -872,21 +1173,28 @@
             banglesLeft += matchedItem.bonusValue;
             hitsThisLevel++;
             totalHitsAllLevels++;
-            sound.playHit(true);
-            spawnHitParticles(hitX, hitY, '#52ffb8', 36);
-            spawnFloatingText(hitX, hitY - 24, `套中！玉鐲 +${matchedItem.bonusValue}`, '#6effc6');
+            sound.playHit(true, consecutiveHits);
+            const burstColor = matchedItem.bonusValue >= 5 ? '#fde047' : '#52ffb8';
+            spawnHitParticles(hitX, hitY, burstColor, matchedItem.bonusValue >= 5 ? 44 : 34);
+            spawnFloatingText(hitX, hitY - 26, `套中！玉鐲 +${matchedItem.bonusValue}`, burstColor);
+            pulseHudPill('pill-bangles');
+            pulseHudPill('pill-hits');
           } else {
             hitsThisLevel++;
             totalHitsAllLevels++;
-            sound.playHit(false);
+            sound.playHit(false, consecutiveHits);
             spawnHitParticles(hitX, hitY, '#ffd166', 30);
-            spawnFloatingText(hitX, hitY - 24, `套中 ${matchedItem.name}！`, '#ffe066');
+            const streakTag = consecutiveHits >= 2 ? `（連中 ×${consecutiveHits}）` : '';
+            spawnFloatingText(hitX, hitY - 26, `套中 ${matchedItem.name}！${streakTag}`, '#ffe066');
+            pulseHudPill('pill-hits');
           }
 
           updateHUD();
         } else {
-          // MISS! Play realistic jade shatter sound + spawn enlarged jade fracture shards
+          // MISS: reset streak, realistic jade shatter sound + micro camera shake + bouncing curved jade shards
+          consecutiveHits = 0;
           sound.playShatter();
+          triggerMicroShake(3.2, 0.14);
           spawnJadeShatter(bangle.targetX, bangle.targetY);
         }
 
@@ -898,12 +1206,15 @@
         const allCaptured = items.every(it => it.captured);
 
         if ((banglesLeft <= 0 && activeBangles.length === 0) || allCaptured) {
-          setTimeout(() => {
+          if (roundEndTimer !== null) clearTimeout(roundEndTimer);
+          roundEndTimer = setTimeout(() => {
+            roundEndTimer = null;
             if (gameState !== 'PLAYING') return;
-            if (activeBangles.length > 0 || (banglesLeft > 0 && !allCaptured)) return;
+            const stillAllCaptured = items.every(it => it.captured);
+            if (activeBangles.length > 0 || (banglesLeft > 0 && !stillAllCaptured)) return;
 
             if (hitsThisLevel >= 1) {
-              if (currentLevelIndex >= 9) {
+              if (currentLevelIndex >= 19) {
                 triggerVictoryScreen();
               } else {
                 triggerLevelClearModal();
@@ -911,7 +1222,7 @@
             } else {
               triggerRetryModal();
             }
-          }, 760);
+          }, 780);
         }
       }
 
@@ -921,20 +1232,20 @@
           x: x,
           y: y,
           r: 12,
-          maxR: 78,
+          maxR: 84,
           alpha: 1,
           color: mainColor
         });
 
         for (let i = 0; i < count; i++) {
           const angle = (Math.PI * 2 * i) / count + (Math.random() - 0.5) * 0.3;
-          const spd = 50 + Math.random() * 145;
+          const spd = 52 + Math.random() * 150;
           particles.push({
             kind: 'spark',
             x: x,
             y: y,
             vx: Math.cos(angle) * spd,
-            vy: Math.sin(angle) * spd - 35,
+            vy: Math.sin(angle) * spd - 38,
             r: 2.5 + Math.random() * 3.5,
             alpha: 1,
             decay: 1.05 + Math.random() * 0.65,
@@ -943,49 +1254,67 @@
         }
       }
 
-      // Enlarged +30% curved jade bangle fracture pieces that bounce on the shelf/floor
       function spawnJadeShatter(x, y) {
-        const pieceCount = 11;
-        // Impact shockwave dust ring
+        // Brief bright impact flash & fracture ring
         particles.push({
           kind: 'ring',
           x: x,
           y: y,
           r: 8,
-          maxR: 46,
-          alpha: 0.75,
+          maxR: 48,
+          alpha: 0.8,
           color: '#a7f3d0'
         });
 
+        // 11 curved broken emerald jade bangle segments + 10 fine jade splinters
+        const pieceCount = 11;
         for (let i = 0; i < pieceCount; i++) {
           const angle = (Math.PI * 2 * i) / pieceCount + (Math.random() - 0.5) * 0.35;
-          const speed = 55 + Math.random() * 125;
+          const speed = 55 + Math.random() * 130;
           const floorBounceY = y + 10 + Math.random() * 24;
           jadeShards.push({
             x: x + Math.cos(angle) * 14,
             y: y + Math.sin(angle) * 9,
             vx: Math.cos(angle) * speed,
-            vy: Math.sin(angle) * speed - 75,
+            vy: Math.sin(angle) * speed - 78,
             floorY: floorBounceY,
             bounced: false,
             rot: angle + Math.random() * 1.2,
-            vRot: (Math.random() - 0.5) * 15,
-            arcRadius: 14 + Math.random() * 8, // 30% larger curved jade segment
+            vRot: (Math.random() - 0.5) * 16,
+            arcRadius: 14 + Math.random() * 8,
             arcSpan: 0.48 + Math.random() * 0.38,
             thick: 5.2 + Math.random() * 2.6,
             alpha: 1.0
           });
         }
+
+        for (let j = 0; j < 10; j++) {
+          const a = Math.random() * Math.PI * 2;
+          const spd = 40 + Math.random() * 120;
+          particles.push({
+            kind: 'spark',
+            x: x,
+            y: y,
+            vx: Math.cos(a) * spd,
+            vy: Math.sin(a) * spd - 40,
+            r: 1.8 + Math.random() * 2.0,
+            alpha: 0.95,
+            decay: 1.5 + Math.random() * 0.8,
+            color: j % 2 === 0 ? '#6ee7b7' : '#ecfdf5'
+          });
+        }
       }
 
       function spawnFloatingText(x, y, text, color) {
+        // Keep floating text safely inside horizontal canvas margins
+        const safeX = Math.max(84, Math.min(width - 84, x));
         floatingTexts.push({
-          x: x,
+          x: safeX,
           y: y,
           text: text,
           color: color,
           alpha: 1.0,
-          vy: -40
+          vy: -42
         });
       }
 
@@ -1035,6 +1364,7 @@
       const hudLayer = document.getElementById('hud-layer');
 
       function showHomeScreen() {
+        clearPendingTimers();
         gameState = 'HOME';
         setupLevel(0);
         screenHome.classList.remove('hidden');
@@ -1046,6 +1376,7 @@
       }
 
       function startGameFromBeginning() {
+        clearPendingTimers();
         sound.init();
         sound.startBGM();
         totalHitsAllLevels = 0;
@@ -1060,6 +1391,7 @@
       }
 
       function triggerLevelClearModal() {
+        clearPendingTimers();
         gameState = 'CLEAR';
         const titleEl = document.getElementById('clear-title');
         const subEl = document.getElementById('clear-subtitle');
@@ -1069,19 +1401,24 @@
       }
 
       function triggerRetryModal() {
+        clearPendingTimers();
         gameState = 'RETRY';
         modalRetry.classList.remove('hidden');
       }
 
       function triggerVictoryScreen() {
+        clearPendingTimers();
         gameState = 'VICTORY';
         const statsEl = document.getElementById('victory-stats');
         if (statsEl) {
-          statsEl.textContent = `10 關全數破關・累計套中 ${totalHitsAllLevels} 個獎品！`;
+          statsEl.textContent = `20 關全數破關・累計套中 ${totalHitsAllLevels} 個獎品！`;
         }
         modalVictory.classList.remove('hidden');
         spawnFireworkBurst();
-        setTimeout(() => { if (gameState === 'VICTORY') spawnFireworkBurst(); }, 350);
+        victoryFireworkTimer = setTimeout(() => {
+          victoryFireworkTimer = null;
+          if (gameState === 'VICTORY') spawnFireworkBurst();
+        }, 350);
       }
 
       document.getElementById('btn-start-game').addEventListener('click', () => {
@@ -1120,7 +1457,7 @@
       });
 
       // ==========================================
-      // 8. TOUCH & MOUSE INPUT (Tap Target OR Flick Bangle)
+      // 8. SINGLE-POINTER TOUCH & MOUSE INPUT (Tap Target OR Drag/Flick Bangle)
       // ==========================================
       function getCanvasPoint(clientX, clientY) {
         const rect = canvas.getBoundingClientRect();
@@ -1132,64 +1469,83 @@
 
       canvas.addEventListener('pointerdown', (e) => {
         if (gameState !== 'PLAYING' || banglesLeft <= 0) return;
+        if (activePointerId !== null) return;
         sound.init();
         if (!sound.bgmPlaying && !sound.muted) sound.startBGM();
 
+        activePointerId = e.pointerId;
         const pt = getCanvasPoint(e.clientX, e.clientY);
-        pointerDown = true;
         pointerStart = { x: pt.x, y: pt.y, time: performance.now() };
         pointerCurr = { x: pt.x, y: pt.y };
-
         isDraggingAim = pt.y > height * 0.72;
       });
 
       canvas.addEventListener('pointermove', (e) => {
-        if (!pointerDown || gameState !== 'PLAYING') return;
-        const pt = getCanvasPoint(e.clientX, e.clientY);
-        pointerCurr = { x: pt.x, y: pt.y };
+        if (e.pointerId !== activePointerId || gameState !== 'PLAYING') return;
+        pointerCurr = getCanvasPoint(e.clientX, e.clientY);
       });
 
-      window.addEventListener('pointerup', (e) => {
-        if (!pointerDown) return;
-        pointerDown = false;
-        if (gameState !== 'PLAYING' || banglesLeft <= 0) return;
+      function finishPointer(e, cancelled) {
+        if (e.pointerId !== activePointerId) return;
+        activePointerId = null;
+
+        if (cancelled || gameState !== 'PLAYING' || banglesLeft <= 0) {
+          isDraggingAim = false;
+          return;
+        }
 
         const pt = getCanvasPoint(e.clientX, e.clientY);
         const dx = pt.x - pointerStart.x;
         const dy = pt.y - pointerStart.y;
         const dist = Math.hypot(dx, dy);
 
-        if (isDraggingAim && dy < -25) {
+        if (isDraggingAim && dy < -22) {
           const hand = getPlayerHandPos();
           const targetX = hand.x + dx * 1.45;
           const targetY = hand.y + dy * 1.65;
           launchBangle(targetX, targetY);
-        } else if (pt.y <= height * 0.75 && dist < 38) {
+        } else if (pt.y <= height * 0.75 && dist < 40) {
           launchBangle(pt.x, pt.y);
         } else if (dy < -25) {
           launchBangle(pt.x + dx * 0.6, pt.y + dy * 0.6);
         }
         isDraggingAim = false;
+      }
+
+      window.addEventListener('pointerup', (e) => finishPointer(e, false));
+      window.addEventListener('pointercancel', (e) => finishPointer(e, true));
+
+      // Pause/resume cleanly when switching iOS apps or browser tabs
+      document.addEventListener('visibilitychange', () => {
+        if (document.hidden) {
+          sound.stopBGM();
+          activePointerId = null;
+          isDraggingAim = false;
+        } else {
+          lastTime = performance.now();
+          if (gameState !== 'HOME' && !sound.muted) {
+            sound.startBGM();
+          }
+        }
       });
 
       // ==========================================
       // 9. HIGH-CRAFT TAIWAN NIGHT MARKET SCENE RENDERING
       // ==========================================
-      function drawNightMarketScene() {
+      function drawNightMarketBackdrop() {
         // 1. Deep Night Market Sky & Distant Street Bokeh
         const skyGrad = ctx.createLinearGradient(0, 0, 0, height);
-        skyGrad.addColorStop(0, '#0f0503');
+        skyGrad.addColorStop(0, '#0d0402');
         skyGrad.addColorStop(0.35, '#260e07');
         skyGrad.addColorStop(0.72, '#381509');
-        skyGrad.addColorStop(1, '#140703');
+        skyGrad.addColorStop(1, '#120602');
         ctx.fillStyle = skyGrad;
         ctx.fillRect(0, 0, width, height);
 
-        // Out-of-focus background night market lights (遠處夜市燈火散景)
         ctx.save();
         for (let i = 0; i < distantBokeh.length; i++) {
           const bk = distantBokeh[i];
-          const pulse = 0.85 + 0.15 * Math.sin(globalTime * 1.6 + bk.phase);
+          const pulse = 0.86 + 0.14 * Math.sin(globalTime * 1.6 + bk.phase);
           const bGrad = ctx.createRadialGradient(bk.x, bk.y, 1, bk.x, bk.y, bk.r * pulse);
           bGrad.addColorStop(0, bk.color);
           bGrad.addColorStop(1, 'rgba(0,0,0,0)');
@@ -1201,25 +1557,16 @@
         ctx.restore();
 
         // Warm ambient golden-orange glow radiating from the booth interior
-        const glowGrad = ctx.createRadialGradient(width * 0.5, height * 0.42, 30, width * 0.5, height * 0.42, width * 0.82);
-        glowGrad.addColorStop(0, 'rgba(255, 175, 70, 0.34)');
+        const glowGrad = ctx.createRadialGradient(width * 0.5, height * 0.42, 30, width * 0.5, height * 0.42, width * 0.85);
+        glowGrad.addColorStop(0, 'rgba(255, 178, 72, 0.36)');
         glowGrad.addColorStop(0.55, 'rgba(215, 80, 20, 0.14)');
         glowGrad.addColorStop(1, 'rgba(0, 0, 0, 0)');
         ctx.fillStyle = glowGrad;
         ctx.fillRect(0, 0, width, height);
 
-        // 2. Side Decorations: Bunting Flags (彩旗), Balloons (氣球), Paper Lanterns (紙燈籠)
         drawBuntingFlags();
         drawSideBalloonsAndPaperLanterns();
-
-        // 3. Stepped Dark-Wood 3-Tier Stall Frame with Red Velvet Mats (深色木質攤架 + 夜市經典紅絨布襯墊)
-        drawWoodenStallStructure();
-
-        // 4. Red Fabric Awning Curtain & Handwritten "套圈圈" Signboard
-        drawTopCurtainAndSignboard();
-
-        // 5. Warm Tungsten Bulbs with Brass Shades, Light Cones & Red Lanterns
-        drawBulbsAndRedLanterns();
+        drawWoodenStallBackAndShelves();
       }
 
       function drawBuntingFlags() {
@@ -1262,14 +1609,14 @@
       function drawSideBalloonsAndPaperLanterns() {
         ctx.save();
         const sidePositions = [
-          { x: width * 0.04, y: height * 0.31, color: '#ff6b35' },
-          { x: width * 0.04, y: height * 0.47, color: '#ffb703' },
-          { x: width * 0.96, y: height * 0.31, color: '#ffb703' },
-          { x: width * 0.96, y: height * 0.47, color: '#ff6b35' }
+          { x: width * 0.038, y: height * 0.31, color: '#ff6b35' },
+          { x: width * 0.038, y: height * 0.47, color: '#ffb703' },
+          { x: width * 0.962, y: height * 0.31, color: '#ffb703' },
+          { x: width * 0.962, y: height * 0.47, color: '#ff6b35' }
         ];
 
         sidePositions.forEach((p, idx) => {
-          const swing = Math.sin(globalTime * 1.8 + idx * 1.3) * 2.8;
+          const swing = Math.sin(globalTime * 1.8 + idx * 1.3) * 2.6;
           const lx = p.x + swing;
           const ly = p.y;
 
@@ -1293,7 +1640,6 @@
           ctx.ellipse(lx, ly, 11, 14, 0, 0, Math.PI * 2);
           ctx.fill();
 
-          // Horizontal paper pleats
           ctx.strokeStyle = 'rgba(110, 25, 5, 0.4)';
           ctx.lineWidth = 0.9;
           for (let py = -8; py <= 8; py += 4) {
@@ -1308,10 +1654,9 @@
           ctx.fillRect(lx - 5.5, ly + 12, 11, 3);
         });
 
-        // Glossy Carnival Balloons on both sides
         const balloonClusters = [
-          { baseX: width * 0.065, baseY: height * 0.65, offsets: [{ dx: -6, dy: -30, c: '#ef476f' }, { dx: 7, dy: -39, c: '#3a86ff' }, { dx: -1, dy: -49, c: '#ffbe0b' }] },
-          { baseX: width * 0.935, baseY: height * 0.65, offsets: [{ dx: 6, dy: -30, c: '#06d6a0' }, { dx: -7, dy: -39, c: '#ef476f' }, { dx: 1, dy: -49, c: '#ffbe0b' }] }
+          { baseX: width * 0.06, baseY: height * 0.65, offsets: [{ dx: -6, dy: -30, c: '#ef476f' }, { dx: 7, dy: -39, c: '#3a86ff' }, { dx: -1, dy: -49, c: '#ffbe0b' }] },
+          { baseX: width * 0.94, baseY: height * 0.65, offsets: [{ dx: 6, dy: -30, c: '#06d6a0' }, { dx: -7, dy: -39, c: '#ef476f' }, { dx: 1, dy: -49, c: '#ffbe0b' }] }
         ];
 
         balloonClusters.forEach((cl, cIdx) => {
@@ -1341,32 +1686,31 @@
         ctx.restore();
       }
 
-      function drawWoodenStallStructure() {
-        const stallLeft = width * 0.048;
-        const stallRight = width * 0.952;
+      function drawWoodenStallBackAndShelves() {
+        const { stallLeft, stallRight } = getBoothInnerBounds();
         const stallW = stallRight - stallLeft;
         const stallTop = height * 0.155;
         const stallBot = height * 0.725;
 
         ctx.save();
 
-        // Outer heavy timber shadow
-        ctx.fillStyle = 'rgba(0, 0, 0, 0.65)';
+        // Outer heavy timber drop shadow
+        ctx.fillStyle = 'rgba(0, 0, 0, 0.68)';
         ctx.beginPath();
         ctx.roundRect(stallLeft - 5, stallTop + 4, stallW + 10, stallBot - stallTop + 12, 12);
         ctx.fill();
 
-        // Recessed Dark-Wood Booth Backboard with warm top spotlight gradient
+        // Recessed Dark-Wood Booth Backboard
         const backGrad = ctx.createLinearGradient(0, stallTop, 0, stallBot);
-        backGrad.addColorStop(0, '#36170a');
-        backGrad.addColorStop(0.35, '#2b1207');
-        backGrad.addColorStop(1, '#160803');
+        backGrad.addColorStop(0, '#3a190b');
+        backGrad.addColorStop(0.38, '#2b1207');
+        backGrad.addColorStop(1, '#140702');
         ctx.fillStyle = backGrad;
         ctx.beginPath();
         ctx.roundRect(stallLeft, stallTop, stallW, stallBot - stallTop, 10);
         ctx.fill();
 
-        // Vertical timber tongue-and-groove plank lines + subtle wood grain
+        // Vertical timber planks + subtle handcrafted wood grain streaks
         ctx.strokeStyle = 'rgba(10, 3, 1, 0.55)';
         ctx.lineWidth = 1.5;
         const planks = 10;
@@ -1378,85 +1722,7 @@
           ctx.stroke();
         }
 
-        // Draw Stepped 3D Wooden Shelves with Red Velvet Mats (紅絨布階梯層架)
-        shelfRows.forEach((row) => {
-          const sy = row.y + 5;
-          const depth = 18 + row.depthRatio * 5;
-          const bL = row.boardLeft;
-          const bR = row.boardRight;
-
-          // Cast shadow under the shelf board onto the back wall
-          ctx.fillStyle = 'rgba(0, 0, 0, 0.55)';
-          ctx.fillRect(bL, sy + 10, bR - bL, 10);
-
-          // Wooden Shelf Top Perspective Surface
-          const woodTopGrad = ctx.createLinearGradient(0, sy - depth, 0, sy);
-          woodTopGrad.addColorStop(0, '#4f2411');
-          woodTopGrad.addColorStop(1, '#7c3c1d');
-          ctx.fillStyle = woodTopGrad;
-          ctx.beginPath();
-          ctx.moveTo(bL + 10, sy - depth);
-          ctx.lineTo(bR - 10, sy - depth);
-          ctx.lineTo(bR, sy);
-          ctx.lineTo(bL, sy);
-          ctx.closePath();
-          ctx.fill();
-
-          // Red Velvet / Felt Runner Mat on top of the wooden shelf (經典夜市紅絨布墊)
-          const feltGrad = ctx.createLinearGradient(0, sy - depth + 3, 0, sy - 2);
-          feltGrad.addColorStop(0, '#6e0d10');
-          feltGrad.addColorStop(0.5, '#9e191d');
-          feltGrad.addColorStop(1, '#7a1013');
-          ctx.fillStyle = feltGrad;
-          ctx.beginPath();
-          ctx.moveTo(bL + 14, sy - depth + 2.5);
-          ctx.lineTo(bR - 14, sy - depth + 2.5);
-          ctx.lineTo(bR - 5, sy - 2);
-          ctx.lineTo(bL + 5, sy - 2);
-          ctx.closePath();
-          ctx.fill();
-
-          // Thick Hardwood Front Lip with brass/gold trim strip
-          const frontGrad = ctx.createLinearGradient(0, sy, 0, sy + 13);
-          frontGrad.addColorStop(0, '#6e3419');
-          frontGrad.addColorStop(0.45, '#471f0d');
-          frontGrad.addColorStop(1, '#260f05');
-          ctx.fillStyle = frontGrad;
-          ctx.fillRect(bL, sy, bR - bL, 13);
-
-          // Gold/brass molding line along shelf lip
-          ctx.strokeStyle = 'rgba(255, 208, 120, 0.48)';
-          ctx.lineWidth = 1.2;
-          ctx.beginPath();
-          ctx.moveTo(bL, sy + 1);
-          ctx.lineTo(bR, sy + 1);
-          ctx.stroke();
-
-          ctx.strokeStyle = 'rgba(212, 155, 65, 0.3)';
-          ctx.beginPath();
-          ctx.moveTo(bL + 4, sy + 10);
-          ctx.lineTo(bR - 4, sy + 10);
-          ctx.stroke();
-        });
-
-        // Left & Right Heavy Solid Rosewood Pillars with bevel highlights
-        const pillarW = 14;
-        [stallLeft - 3, stallRight - pillarW + 3].forEach((px) => {
-          const pGrad = ctx.createLinearGradient(px, 0, px + pillarW, 0);
-          pGrad.addColorStop(0, '#1f0c04');
-          pGrad.addColorStop(0.35, '#693016');
-          pGrad.addColorStop(0.65, '#4d210d');
-          pGrad.addColorStop(1, '#1a0903');
-          ctx.fillStyle = pGrad;
-          ctx.fillRect(px, stallTop, pillarW, stallBot - stallTop + 18);
-
-          // Brass corner brackets
-          ctx.fillStyle = '#d49b42';
-          ctx.fillRect(px + 1, stallTop + 28, pillarW - 2, 4);
-          ctx.fillRect(px + 1, stallBot - 20, pillarW - 2, 4);
-        });
-
-        // Lower Stall Festive Red Table Skirt with traditional gold wave border
+        // Lower Stall Red Table Skirt
         const skirtTop = stallBot - 4;
         const skirtH = height * 0.055;
         const skirtGrad = ctx.createLinearGradient(0, skirtTop, 0, skirtTop + skirtH);
@@ -1476,6 +1742,167 @@
         ctx.restore();
       }
 
+      function drawSingleShelfBoard(row) {
+        const sy = row.y + 5;
+        const depth = 18 + row.depthRatio * 5;
+        const bL = row.boardLeft;
+        const bR = row.boardRight;
+
+        ctx.save();
+        // Cast shadow under shelf board
+        ctx.fillStyle = 'rgba(0, 0, 0, 0.58)';
+        ctx.fillRect(bL, sy + 10, bR - bL, 11);
+
+        // Wooden shelf top surface
+        const woodTopGrad = ctx.createLinearGradient(0, sy - depth, 0, sy);
+        woodTopGrad.addColorStop(0, '#4f2411');
+        woodTopGrad.addColorStop(1, '#7e3d1e');
+        ctx.fillStyle = woodTopGrad;
+        ctx.beginPath();
+        ctx.moveTo(bL + 10, sy - depth);
+        ctx.lineTo(bR - 10, sy - depth);
+        ctx.lineTo(bR, sy);
+        ctx.lineTo(bL, sy);
+        ctx.closePath();
+        ctx.fill();
+
+        // Red Velvet Runner Mat on top of shelf
+        const feltGrad = ctx.createLinearGradient(0, sy - depth + 3, 0, sy - 2);
+        feltGrad.addColorStop(0, '#6e0c10');
+        feltGrad.addColorStop(0.5, '#a31a1f');
+        feltGrad.addColorStop(1, '#7a0f12');
+        ctx.fillStyle = feltGrad;
+        ctx.beginPath();
+        ctx.moveTo(bL + 13, sy - depth + 2.5);
+        ctx.lineTo(bR - 13, sy - depth + 2.5);
+        ctx.lineTo(bR - 5, sy - 2);
+        ctx.lineTo(bL + 5, sy - 2);
+        ctx.closePath();
+        ctx.fill();
+
+        // Hardwood Front Lip
+        const frontGrad = ctx.createLinearGradient(0, sy, 0, sy + 13);
+        frontGrad.addColorStop(0, '#703519');
+        frontGrad.addColorStop(0.45, '#471f0d');
+        frontGrad.addColorStop(1, '#240e04');
+        ctx.fillStyle = frontGrad;
+        ctx.fillRect(bL, sy, bR - bL, 13);
+
+        // Brass molding highlight
+        ctx.strokeStyle = 'rgba(255, 210, 125, 0.52)';
+        ctx.lineWidth = 1.2;
+        ctx.beginPath();
+        ctx.moveTo(bL, sy + 1);
+        ctx.lineTo(bR, sy + 1);
+        ctx.stroke();
+
+        ctx.strokeStyle = 'rgba(212, 155, 65, 0.32)';
+        ctx.beginPath();
+        ctx.moveTo(bL + 4, sy + 10);
+        ctx.lineTo(bR - 4, sy + 10);
+        ctx.stroke();
+        ctx.restore();
+      }
+
+      // Drawn OVER the strictly clipped toys: soft interior occlusion shadows + solid rosewood pillars + pleated red side drapes!
+      function drawWoodenStallFrontPillarsAndTop() {
+        const { stallLeft, stallRight, pillarW, innerLeft, innerRight } = getBoothInnerBounds();
+        const stallTop = height * 0.155;
+        const stallBot = height * 0.725;
+        const stallH = stallBot - stallTop;
+
+        ctx.save();
+
+        // 1. Soft interior recess shadows along left & right inner edges (gives real 3D depth as toys slide behind the pillars)
+        const shadowW = 22;
+        const leftShadow = ctx.createLinearGradient(innerLeft, 0, innerLeft + shadowW, 0);
+        leftShadow.addColorStop(0, 'rgba(8, 2, 0, 0.78)');
+        leftShadow.addColorStop(0.45, 'rgba(8, 2, 0, 0.30)');
+        leftShadow.addColorStop(1, 'rgba(8, 2, 0, 0)');
+        ctx.fillStyle = leftShadow;
+        ctx.fillRect(innerLeft, stallTop, shadowW, stallH);
+
+        const rightShadow = ctx.createLinearGradient(innerRight, 0, innerRight - shadowW, 0);
+        rightShadow.addColorStop(0, 'rgba(8, 2, 0, 0.78)');
+        rightShadow.addColorStop(0.45, 'rgba(8, 2, 0, 0.30)');
+        rightShadow.addColorStop(1, 'rgba(8, 2, 0, 0)');
+        ctx.fillStyle = rightShadow;
+        ctx.fillRect(innerRight - shadowW, stallTop, shadowW, stallH);
+
+        // 2. Solid Rosewood Side Pillars (completely opaque wooden frame occluding the track entrance/exit)
+        [stallLeft - 2, stallRight - pillarW + 2].forEach((px, idx) => {
+          const pGrad = ctx.createLinearGradient(px, 0, px + pillarW, 0);
+          pGrad.addColorStop(0, '#180802');
+          pGrad.addColorStop(0.32, '#753619');
+          pGrad.addColorStop(0.68, '#4f220e');
+          pGrad.addColorStop(1, '#160702');
+          ctx.fillStyle = pGrad;
+          ctx.fillRect(px, stallTop, pillarW, stallH + 18);
+
+          // Inner bevel edge highlight
+          ctx.strokeStyle = 'rgba(255, 205, 125, 0.25)';
+          ctx.lineWidth = 1;
+          const innerEdgeX = idx === 0 ? px + pillarW - 0.5 : px + 0.5;
+          ctx.beginPath();
+          ctx.moveTo(innerEdgeX, stallTop);
+          ctx.lineTo(innerEdgeX, stallBot + 16);
+          ctx.stroke();
+
+          // Brass mounting brackets
+          ctx.fillStyle = '#e0a546';
+          ctx.fillRect(px + 1.5, stallTop + 28, pillarW - 3, 4.5);
+          ctx.fillRect(px + 1.5, stallTop + stallH * 0.5, pillarW - 3, 4.5);
+          ctx.fillRect(px + 1.5, stallBot - 22, pillarW - 3, 4.5);
+        });
+
+        // 3. Pleated Red Night Market Side Curtains tied neatly along the outer pillars
+        const drapeH = stallH * 0.88;
+        // Left drape
+        const lDrapeGrad = ctx.createLinearGradient(stallLeft - 6, 0, innerLeft + 6, 0);
+        lDrapeGrad.addColorStop(0, '#780c09');
+        lDrapeGrad.addColorStop(0.5, '#b81d18');
+        lDrapeGrad.addColorStop(1, '#630806');
+        ctx.fillStyle = lDrapeGrad;
+        ctx.beginPath();
+        ctx.moveTo(stallLeft - 5, stallTop + 2);
+        ctx.lineTo(innerLeft + 5, stallTop + 2);
+        ctx.quadraticCurveTo(innerLeft + 1, stallTop + drapeH * 0.45, stallLeft + 3, stallTop + drapeH * 0.62);
+        ctx.quadraticCurveTo(innerLeft - 1, stallTop + drapeH * 0.82, stallLeft + 5, stallTop + drapeH);
+        ctx.lineTo(stallLeft - 5, stallTop + drapeH);
+        ctx.closePath();
+        ctx.fill();
+
+        // Right drape
+        const rDrapeGrad = ctx.createLinearGradient(innerRight - 6, 0, stallRight + 6, 0);
+        rDrapeGrad.addColorStop(0, '#630806');
+        rDrapeGrad.addColorStop(0.5, '#b81d18');
+        rDrapeGrad.addColorStop(1, '#780c09');
+        ctx.fillStyle = rDrapeGrad;
+        ctx.beginPath();
+        ctx.moveTo(stallRight + 5, stallTop + 2);
+        ctx.lineTo(innerRight - 5, stallTop + 2);
+        ctx.quadraticCurveTo(innerRight - 1, stallTop + drapeH * 0.45, stallRight - 3, stallTop + drapeH * 0.62);
+        ctx.quadraticCurveTo(innerRight + 1, stallTop + drapeH * 0.82, stallRight - 5, stallTop + drapeH);
+        ctx.lineTo(stallRight + 5, stallTop + drapeH);
+        ctx.closePath();
+        ctx.fill();
+
+        // Gold tie-back cords on both side curtains
+        ctx.strokeStyle = '#fad05a';
+        ctx.lineWidth = 2.4;
+        ctx.beginPath();
+        ctx.moveTo(stallLeft - 4, stallTop + drapeH * 0.60);
+        ctx.lineTo(stallLeft + 5, stallTop + drapeH * 0.63);
+        ctx.moveTo(stallRight + 4, stallTop + drapeH * 0.60);
+        ctx.lineTo(stallRight - 5, stallTop + drapeH * 0.63);
+        ctx.stroke();
+
+        ctx.restore();
+
+        drawTopCurtainAndSignboard();
+        drawBulbsAndRedLanterns();
+      }
+
       function drawTopCurtainAndSignboard() {
         const stallLeft = width * 0.04;
         const stallRight = width * 0.96;
@@ -1485,7 +1912,6 @@
 
         ctx.save();
 
-        // Scalloped Red Fabric Valance Curtain (前方紅色布簾＋金穗邊)
         const scallops = 9;
         const scW = stallW / scallops;
         for (let i = 0; i < scallops; i++) {
@@ -1504,7 +1930,6 @@
           ctx.closePath();
           ctx.fill();
 
-          // Pleat shadow
           ctx.strokeStyle = 'rgba(60, 5, 2, 0.45)';
           ctx.lineWidth = 1;
           ctx.beginPath();
@@ -1512,7 +1937,6 @@
           ctx.lineTo(sx, awningTop + awningH - 6);
           ctx.stroke();
 
-          // Gold fringe border
           ctx.strokeStyle = '#fad05a';
           ctx.lineWidth = 2.4;
           ctx.beginPath();
@@ -1521,7 +1945,6 @@
           ctx.stroke();
         }
 
-        // Top Rosewood Roof Beam
         const beamGrad = ctx.createLinearGradient(0, awningTop - 11, 0, awningTop + 2);
         beamGrad.addColorStop(0, '#2e1206');
         beamGrad.addColorStop(0.5, '#6b3117');
@@ -1531,25 +1954,21 @@
         ctx.roundRect(stallLeft - 4, awningTop - 10, stallW + 8, 13, 5);
         ctx.fill();
 
-        // Authentic Night Market Handwritten Wooden Signboard: 「套圈圈」
         const signW = Math.min(204, width * 0.52);
         const signH = 52;
         const signX = width * 0.5 - signW * 0.5;
         const signY = awningTop - 15;
 
-        // Drop shadow
         ctx.fillStyle = 'rgba(0, 0, 0, 0.6)';
         ctx.beginPath();
         ctx.roundRect(signX - 3, signY - 1, signW + 6, signH + 8, 13);
         ctx.fill();
 
-        // Dark wood frame
         ctx.fillStyle = '#3d1707';
         ctx.beginPath();
         ctx.roundRect(signX - 4, signY - 4, signW + 8, signH + 8, 12);
         ctx.fill();
 
-        // Warm aged cypress wood face
         const plaqueGrad = ctx.createLinearGradient(signX, signY, signX, signY + signH);
         plaqueGrad.addColorStop(0, '#fff5d6');
         plaqueGrad.addColorStop(0.5, '#f5d58e');
@@ -1559,14 +1978,12 @@
         ctx.roundRect(signX, signY, signW, signH, 9);
         ctx.fill();
 
-        // Traditional red double border with corner flourishes
         ctx.strokeStyle = '#b81d13';
         ctx.lineWidth = 2.5;
         ctx.beginPath();
         ctx.roundRect(signX + 3.5, signY + 3.5, signW - 7, signH - 7, 6);
         ctx.stroke();
 
-        // Corner brass studs
         ctx.fillStyle = '#b81d13';
         [
           [signX + 9, signY + 9],
@@ -1579,7 +1996,6 @@
           ctx.fill();
         });
 
-        // Bold Handwritten Brush Calligraphy "套圈圈"
         ctx.font = '900 30px "Noto Serif TC", "Noto Sans TC", serif';
         ctx.textAlign = 'center';
         ctx.textBaseline = 'middle';
@@ -1598,29 +2014,26 @@
 
         ctx.save();
 
-        // 1. Warm Tungsten Light Bulbs with Brass Shades & Volumetric Light Cones
         const bulbCount = 7;
         for (let i = 0; i < bulbCount; i++) {
           const bx = stallLeft + ((stallRight - stallLeft) * i) / (bulbCount - 1);
           const by = awningY + 4;
           const flicker = 0.88 + 0.12 * Math.sin(globalTime * 6.5 + i * 2.1) * Math.cos(globalTime * 11 + i);
 
-          // Volumetric light cone shining down onto the toys
           if (i % 2 === 0) {
-            const coneGrad = ctx.createLinearGradient(bx, by, bx, by + height * 0.35);
-            coneGrad.addColorStop(0, `rgba(255, 220, 130, ${0.13 * flicker})`);
+            const coneGrad = ctx.createLinearGradient(bx, by, bx, by + height * 0.36);
+            coneGrad.addColorStop(0, `rgba(255, 224, 135, ${0.12 * flicker})`);
             coneGrad.addColorStop(1, 'rgba(255, 180, 70, 0)');
             ctx.fillStyle = coneGrad;
             ctx.beginPath();
             ctx.moveTo(bx - 6, by);
             ctx.lineTo(bx + 6, by);
-            ctx.lineTo(bx + 58, by + height * 0.35);
-            ctx.lineTo(bx - 58, by + height * 0.35);
+            ctx.lineTo(bx + 58, by + height * 0.36);
+            ctx.lineTo(bx - 58, by + height * 0.36);
             ctx.closePath();
             ctx.fill();
           }
 
-          // Warm bulb halo
           const halo = ctx.createRadialGradient(bx, by, 1, bx, by, 26 * flicker);
           halo.addColorStop(0, `rgba(255, 248, 200, ${0.9 * flicker})`);
           halo.addColorStop(0.45, `rgba(255, 190, 70, ${0.46 * flicker})`);
@@ -1630,7 +2043,6 @@
           ctx.arc(bx, by, 26 * flicker, 0, Math.PI * 2);
           ctx.fill();
 
-          // Vintage brass reflector cap
           ctx.fillStyle = '#b07d32';
           ctx.beginPath();
           ctx.moveTo(bx - 7, by - 2);
@@ -1640,14 +2052,12 @@
           ctx.closePath();
           ctx.fill();
 
-          // Tungsten filament bulb glass
           ctx.fillStyle = '#fffbe0';
           ctx.beginPath();
           ctx.arc(bx, by + 1, 4.5, 0, Math.PI * 2);
           ctx.fill();
         }
 
-        // 2. Two Large Traditional Taiwanese Red Lanterns (紅色燈籠)
         const lanternCoords = [
           { x: width * 0.135, y: height * 0.18 },
           { x: width * 0.865, y: height * 0.18 }
@@ -1677,7 +2087,6 @@
           ctx.ellipse(lx, ly, 22, 18, 0, 0, Math.PI * 2);
           ctx.fill();
 
-          // Gold wireframe ribs
           ctx.strokeStyle = 'rgba(255, 210, 105, 0.5)';
           ctx.lineWidth = 1.1;
           [-10, 0, 10].forEach((rx) => {
@@ -1686,19 +2095,16 @@
             ctx.stroke();
           });
 
-          // Gold auspicious center emblem
           ctx.fillStyle = 'rgba(255, 225, 130, 0.85)';
           ctx.font = 'bold 11px "Noto Serif TC", serif';
           ctx.textAlign = 'center';
           ctx.textBaseline = 'middle';
           ctx.fillText('吉', lx, ly + 0.5);
 
-          // Gold top & bottom caps
           ctx.fillStyle = '#f2b949';
           ctx.fillRect(lx - 8, ly - 19.5, 16, 4);
           ctx.fillRect(lx - 8, ly + 15.5, 16, 4);
 
-          // Multi-strand gold tassel
           ctx.strokeStyle = '#f5c242';
           ctx.lineWidth = 1.6;
           [-2.5, 0, 2.5].forEach((tx) => {
@@ -1713,33 +2119,70 @@
       }
 
       // ==========================================
-      // 10. RENDERING ENLARGED, HIGH-DETAIL TOYS & BONUS PROPS
+      // 10. RENDERING ENLARGED, HIGH-DETAIL TOYS & COLLAR-DROP CELEBRATION
       // ==========================================
       function drawToyItem(item) {
         if (item.captured && item.captureAnim >= 1) return;
 
         ctx.save();
         const bob = Math.sin(globalTime * 3.0 + item.bobPhase) * 2.0;
-        let scale = 1;
+
+        // 2-stage celebratory physics on capture:
+        // Stage 1 (0..0.42): Jade bangle drops snugly onto toy + toy does a joyful squash-and-stretch hop
+        // Stage 2 (0.42..1.0): Collared toy ascends smoothly with golden sparkle fade
+        let scaleX = 1;
+        let scaleY = 1;
+        let liftY = 0;
         let alpha = 1;
+        let collarDropOffsetY = 0;
+
         if (item.captured) {
-          scale = 1 + item.captureAnim * 0.32;
-          alpha = Math.max(0, 1 - item.captureAnim);
+          const p = item.captureAnim;
+          if (p < 0.42) {
+            const k = p / 0.42;
+            const bounce = Math.sin(k * Math.PI);
+            scaleX = 1 + bounce * 0.14;
+            scaleY = 1 - bounce * 0.10 + (k > 0.5 ? (k - 0.5) * 0.28 : 0);
+            liftY = -bounce * 9;
+            collarDropOffsetY = -(1 - Math.min(1, k * 2.2)) * 24;
+          } else {
+            const k = (p - 0.42) / 0.58;
+            scaleX = 1.08 + k * 0.24;
+            scaleY = 1.08 + k * 0.24;
+            liftY = -9 - k * 28;
+            alpha = Math.max(0, 1 - k * 1.15);
+          }
         }
 
-        ctx.translate(item.x, item.y + bob);
-        ctx.scale(scale, scale);
-        ctx.globalAlpha = alpha;
+        // Smooth physical occlusion fade as an item enters the dark recess behind the rosewood pillars
+        const row = shelfRows[item.rowIndex];
+        let edgeFade = 1;
+        if (row) {
+          const distFromLeft = item.x - row.innerLeft;
+          const distFromRight = row.innerRight - item.x;
+          const minEdgeDist = Math.min(distFromLeft, distFromRight);
+          if (minEdgeDist < 18) {
+            edgeFade = Math.max(0, Math.min(1, (minEdgeDist + 14) / 32));
+          }
+        }
+        if (edgeFade <= 0.01) {
+          ctx.restore();
+          return;
+        }
+
+        ctx.translate(item.x, item.y + bob + liftY);
+        ctx.scale(scaleX, scaleY);
+        ctx.globalAlpha = alpha * edgeFade;
 
         const r = item.baseRadius;
 
-        // 1. Contact Drop Shadow on the Red Felt Shelf
+        // Contact drop shadow on shelf
         ctx.fillStyle = 'rgba(10, 2, 0, 0.65)';
         ctx.beginPath();
-        ctx.ellipse(0, 4, r * 0.78, r * 0.22, 0, 0, Math.PI * 2);
+        ctx.ellipse(0, 4 - liftY * 0.5, r * 0.78, r * 0.22, 0, 0, Math.PI * 2);
         ctx.fill();
 
-        // 2. Authentic Night Market Wooden Prize Block / Stand (夜市套圈圈木座底座)
+        // Wooden prize block stand
         const baseGrad = ctx.createLinearGradient(-r * 0.58, 0, r * 0.58, 0);
         baseGrad.addColorStop(0, '#784421');
         baseGrad.addColorStop(0.5, '#e0ac69');
@@ -1752,65 +2195,41 @@
         ctx.lineWidth = 1;
         ctx.stroke();
 
-        // 3. Glow aura for luminous toys & bonus medallions
+        // Glow aura
         if (item.glow) {
           const pulse = 0.86 + 0.14 * Math.sin(globalTime * 4.8 + item.bobPhase);
-          const gColor = item.bonusValue > 0 ? 'rgba(72, 255, 175, 0.45)' : 'rgba(255, 220, 100, 0.40)';
-          const aura = ctx.createRadialGradient(0, -r * 0.45, 3, 0, -r * 0.45, r * 1.45 * pulse);
+          const gColor = item.bonusValue >= 5
+            ? 'rgba(253, 224, 71, 0.52)'
+            : (item.bonusValue > 0 ? 'rgba(72, 255, 175, 0.46)' : 'rgba(255, 220, 100, 0.40)');
+          const auraRad = item.bonusValue > 0 ? r * 1.10 * pulse : r * 1.24 * pulse;
+          const aura = ctx.createRadialGradient(0, -r * 0.45, 3, 0, -r * 0.45, auraRad);
           aura.addColorStop(0, gColor);
           aura.addColorStop(1, 'rgba(0, 0, 0, 0)');
           ctx.fillStyle = aura;
           ctx.beginPath();
-          ctx.arc(0, -r * 0.45, r * 1.45 * pulse, 0, Math.PI * 2);
+          ctx.arc(0, -r * 0.45, auraRad, 0, Math.PI * 2);
           ctx.fill();
         }
 
-        // 4. Draw Detailed 3D-Shaded Toy Artwork
         switch (item.type) {
-          case 'bonus_token':
-            drawBonusProp(r, item.bonusValue);
-            break;
-          case 'teddy_giant':
-            drawTeddyBear(r);
-            break;
-          case 'panda_plush':
-            drawPandaPlush(r);
-            break;
-          case 'mecha_figure':
-            drawMechaFigure(r);
-            break;
-          case 'glow_star_orb':
-            drawGlowStarToy(r);
-            break;
-          case 'retro_car':
-            drawRetroCar(r);
-            break;
-          case 'bunny_doll':
-            drawBunnyDoll(r);
-            break;
-          case 'shiba_plush':
-            drawShibaPlush(r);
-            break;
-          case 'daruma_doll':
-            drawDarumaDoll(r);
-            break;
-          case 'candy_box':
-            drawCandyBox(r);
-            break;
-          case 'keychain_charm':
-            drawKeychainCharm(r);
-            break;
-          case 'mini_duck':
-            drawMiniDuck(r);
-            break;
-          default:
-            drawCapsuleToy(r);
-            break;
+          case 'bonus_token':    drawBonusProp(r, item.bonusValue); break;
+          case 'teddy_giant':    drawTeddyBear(r); break;
+          case 'panda_plush':    drawPandaPlush(r); break;
+          case 'mecha_figure':   drawMechaFigure(r); break;
+          case 'glow_star_orb':  drawGlowStarToy(r); break;
+          case 'retro_car':      drawRetroCar(r); break;
+          case 'bunny_doll':     drawBunnyDoll(r); break;
+          case 'shiba_plush':    drawShibaPlush(r); break;
+          case 'daruma_doll':    drawDarumaDoll(r); break;
+          case 'candy_box':      drawCandyBox(r); break;
+          case 'keychain_charm': drawKeychainCharm(r); break;
+          case 'mini_duck':      drawMiniDuck(r); break;
+          default:               drawCapsuleToy(r); break;
         }
 
-        // If just captured, draw the jade bangle snugly collaring the prize!
+        // Physical jade bangle collar settling around the captured prize!
         if (item.captured) {
-          drawJadeBangleRing(0, -r * 0.15, r * 0.85, r * 0.42, 0);
+          drawJadeBangleRing(0, -r * 0.16 + collarDropOffsetY, r * 0.88, r * 0.44, 0);
         }
 
         ctx.restore();
@@ -1820,26 +2239,33 @@
         ctx.save();
         ctx.translate(0, -r * 0.50);
 
+        const isPlusFive = val >= 5;
         const plaqueGrad = ctx.createRadialGradient(-r * 0.2, -r * 0.2, 2, 0, 0, r * 0.68);
-        plaqueGrad.addColorStop(0, '#34d399');
-        plaqueGrad.addColorStop(0.65, '#059669');
-        plaqueGrad.addColorStop(1, '#064e3b');
+        if (isPlusFive) {
+          plaqueGrad.addColorStop(0, '#fef08a');
+          plaqueGrad.addColorStop(0.55, '#f59e0b');
+          plaqueGrad.addColorStop(1, '#b45309');
+        } else {
+          plaqueGrad.addColorStop(0, '#34d399');
+          plaqueGrad.addColorStop(0.65, '#059669');
+          plaqueGrad.addColorStop(1, '#064e3b');
+        }
 
         ctx.fillStyle = plaqueGrad;
-        ctx.strokeStyle = '#fde047';
-        ctx.lineWidth = 3.5;
+        ctx.strokeStyle = isPlusFive ? '#fffbeb' : '#fde047';
+        ctx.lineWidth = isPlusFive ? 4.0 : 3.5;
         ctx.beginPath();
-        ctx.arc(0, 0, r * 0.65, 0, Math.PI * 2);
+        ctx.arc(0, 0, r * 0.66, 0, Math.PI * 2);
         ctx.fill();
         ctx.stroke();
 
-        ctx.strokeStyle = '#a7f3d0';
+        ctx.strokeStyle = isPlusFive ? '#fef08a' : '#a7f3d0';
         ctx.lineWidth = 1.8;
         ctx.beginPath();
         ctx.arc(0, 0, r * 0.50, 0, Math.PI * 2);
         ctx.stroke();
 
-        ctx.fillStyle = '#fffbeb';
+        ctx.fillStyle = isPlusFive ? '#451a03' : '#fffbeb';
         ctx.font = `900 ${Math.round(r * 0.64)}px "Noto Sans TC", sans-serif`;
         ctx.textAlign = 'center';
         ctx.textBaseline = 'middle';
@@ -1850,8 +2276,6 @@
       function drawTeddyBear(r) {
         ctx.save();
         ctx.translate(0, -r * 0.42);
-
-        // Ears with 3D shading
         const earGrad = ctx.createRadialGradient(0, -r * 0.4, 2, 0, -r * 0.4, r * 0.5);
         earGrad.addColorStop(0, '#d98a4e');
         earGrad.addColorStop(1, '#8c491d');
@@ -1867,7 +2291,6 @@
         ctx.arc(r * 0.38, -r * 0.45, r * 0.11, 0, Math.PI * 2);
         ctx.fill();
 
-        // Arms & Legs
         ctx.fillStyle = '#a85a28';
         ctx.beginPath();
         ctx.ellipse(-r * 0.38, r * 0.14, r * 0.15, r * 0.12, -0.4, 0, Math.PI * 2);
@@ -1876,7 +2299,6 @@
         ctx.ellipse(r * 0.24, r * 0.38, r * 0.16, r * 0.12, 0, 0, Math.PI * 2);
         ctx.fill();
 
-        // Plush Body
         const bodyGrad = ctx.createRadialGradient(-r * 0.12, 0, 3, 0, r * 0.15, r * 0.48);
         bodyGrad.addColorStop(0, '#e59866');
         bodyGrad.addColorStop(0.65, '#ba6832');
@@ -1886,13 +2308,11 @@
         ctx.ellipse(0, r * 0.20, r * 0.40, r * 0.34, 0, 0, Math.PI * 2);
         ctx.fill();
 
-        // Cream belly patch
         ctx.fillStyle = '#fae5d3';
         ctx.beginPath();
         ctx.ellipse(0, r * 0.23, r * 0.23, r * 0.20, 0, 0, Math.PI * 2);
         ctx.fill();
 
-        // Head
         const headGrad = ctx.createRadialGradient(-r * 0.12, -r * 0.28, 3, 0, -r * 0.18, r * 0.44);
         headGrad.addColorStop(0, '#eb9f6d');
         headGrad.addColorStop(0.7, '#c26d35');
@@ -1902,13 +2322,11 @@
         ctx.arc(0, -r * 0.18, r * 0.41, 0, Math.PI * 2);
         ctx.fill();
 
-        // Snout
         ctx.fillStyle = '#fdebd0';
         ctx.beginPath();
         ctx.ellipse(0, -r * 0.10, r * 0.18, r * 0.13, 0, 0, Math.PI * 2);
         ctx.fill();
 
-        // Glossy Eyes & Nose
         ctx.fillStyle = '#1f0d05';
         ctx.beginPath();
         ctx.arc(-r * 0.15, -r * 0.24, r * 0.06, 0, Math.PI * 2);
@@ -1916,14 +2334,12 @@
         ctx.ellipse(0, -r * 0.13, r * 0.07, r * 0.05, 0, 0, Math.PI * 2);
         ctx.fill();
 
-        // Eye highlights
         ctx.fillStyle = '#ffffff';
         ctx.beginPath();
         ctx.arc(-r * 0.17, -r * 0.26, r * 0.022, 0, Math.PI * 2);
         ctx.arc(r * 0.13, -r * 0.26, r * 0.022, 0, Math.PI * 2);
         ctx.fill();
 
-        // Red Bowtie
         ctx.fillStyle = '#e63946';
         ctx.beginPath();
         ctx.moveTo(0, r * 0.04);
@@ -1938,15 +2354,12 @@
         ctx.beginPath();
         ctx.arc(0, r * 0.04, r * 0.05, 0, Math.PI * 2);
         ctx.fill();
-
         ctx.restore();
       }
 
       function drawPandaPlush(r) {
         ctx.save();
         ctx.translate(0, -r * 0.42);
-
-        // Black Ears & Limbs
         ctx.fillStyle = '#18181b';
         ctx.beginPath();
         ctx.arc(-r * 0.36, -r * 0.44, r * 0.19, 0, Math.PI * 2);
@@ -1955,7 +2368,6 @@
         ctx.ellipse(r * 0.36, r * 0.14, r * 0.14, r * 0.11, 0.3, 0, Math.PI * 2);
         ctx.fill();
 
-        // Body & Head with 3D shading
         const pGrad = ctx.createRadialGradient(-r * 0.1, -r * 0.25, 4, 0, 0, r * 0.55);
         pGrad.addColorStop(0, '#ffffff');
         pGrad.addColorStop(0.75, '#e4e4e7');
@@ -1966,7 +2378,6 @@
         ctx.arc(0, -r * 0.18, r * 0.40, 0, Math.PI * 2);
         ctx.fill();
 
-        // Eye patches
         ctx.fillStyle = '#18181b';
         ctx.beginPath();
         ctx.ellipse(-r * 0.15, -r * 0.20, r * 0.11, r * 0.09, -0.3, 0, Math.PI * 2);
@@ -1974,7 +2385,6 @@
         ctx.ellipse(0, -r * 0.09, r * 0.06, r * 0.045, 0, 0, Math.PI * 2);
         ctx.fill();
 
-        // Eye sparkles & rosy cheeks
         ctx.fillStyle = '#ffffff';
         ctx.beginPath();
         ctx.arc(-r * 0.14, -r * 0.22, r * 0.03, 0, Math.PI * 2);
@@ -1986,22 +2396,18 @@
         ctx.arc(-r * 0.25, -r * 0.09, r * 0.065, 0, Math.PI * 2);
         ctx.arc(r * 0.25, -r * 0.09, r * 0.065, 0, Math.PI * 2);
         ctx.fill();
-
         ctx.restore();
       }
 
       function drawMechaFigure(r) {
         ctx.save();
         ctx.translate(0, -r * 0.44);
-
-        // Shoulder Armor
         ctx.fillStyle = '#1d4ed8';
         ctx.beginPath();
         ctx.roundRect(-r * 0.50, -r * 0.06, r * 0.22, r * 0.28, 4);
         ctx.roundRect(r * 0.28, -r * 0.06, r * 0.22, r * 0.28, 4);
         ctx.fill();
 
-        // Torso
         const armorGrad = ctx.createLinearGradient(-r * 0.35, 0, r * 0.35, 0);
         armorGrad.addColorStop(0, '#3b82f6');
         armorGrad.addColorStop(0.5, '#1d4ed8');
@@ -2011,12 +2417,10 @@
         ctx.roundRect(-r * 0.34, -r * 0.04, r * 0.68, r * 0.46, 6);
         ctx.fill();
 
-        // Gold chest vents
         ctx.fillStyle = '#facc15';
         ctx.fillRect(-r * 0.24, r * 0.04, r * 0.18, r * 0.12);
         ctx.fillRect(r * 0.06, r * 0.04, r * 0.18, r * 0.12);
 
-        // Helmet
         ctx.fillStyle = '#f8fafc';
         ctx.strokeStyle = '#475569';
         ctx.lineWidth = 1.5;
@@ -2025,11 +2429,9 @@
         ctx.fill();
         ctx.stroke();
 
-        // Glowing Emerald/Cyan Visor
         ctx.fillStyle = '#38bdf8';
         ctx.fillRect(-r * 0.22, -r * 0.31, r * 0.44, r * 0.12);
 
-        // Golden V-Fin Crest
         ctx.strokeStyle = '#facc15';
         ctx.lineWidth = 3.5;
         ctx.beginPath();
@@ -2037,7 +2439,6 @@
         ctx.lineTo(0, -r * 0.38);
         ctx.lineTo(r * 0.38, -r * 0.58);
         ctx.stroke();
-
         ctx.restore();
       }
 
@@ -2096,14 +2497,12 @@
         ctx.roundRect(-r * 0.28, -r * 0.31, r * 0.56, r * 0.19, 4);
         ctx.fill();
 
-        // Headlights
         ctx.fillStyle = '#fef08a';
         ctx.beginPath();
         ctx.arc(-r * 0.52, r * 0.04, r * 0.07, 0, Math.PI * 2);
         ctx.arc(r * 0.52, r * 0.04, r * 0.07, 0, Math.PI * 2);
         ctx.fill();
 
-        // Wheels
         ctx.fillStyle = '#1e293b';
         ctx.beginPath();
         ctx.arc(-r * 0.34, r * 0.23, r * 0.16, 0, Math.PI * 2);
@@ -2120,7 +2519,6 @@
       function drawBunnyDoll(r) {
         ctx.save();
         ctx.translate(0, -r * 0.36);
-
         ctx.fillStyle = '#fbcfe8';
         ctx.beginPath();
         ctx.ellipse(-r * 0.17, -r * 0.55, r * 0.12, r * 0.30, -0.1, 0, Math.PI * 2);
@@ -2317,11 +2715,10 @@
         const floorTop = height * 0.725;
         ctx.save();
 
-        // Dark weathered wooden floor planks
         const floorGrad = ctx.createLinearGradient(0, floorTop, 0, height);
         floorGrad.addColorStop(0, '#291106');
         floorGrad.addColorStop(0.45, '#3b190b');
-        floorGrad.addColorStop(1, '#160803');
+        floorGrad.addColorStop(1, '#140602');
         ctx.fillStyle = floorGrad;
         ctx.fillRect(0, floorTop, width, height - floorTop);
 
@@ -2334,7 +2731,7 @@
           ctx.stroke();
         }
 
-        // Foreground Wooden Fence Railing (圍欄，玩家站在圍欄外)
+        // Foreground Wooden Fence Railing
         const fenceY = height * 0.78;
         const postCount = 6;
         const postSpacing = width / (postCount - 1);
@@ -2358,7 +2755,7 @@
         ctx.fillStyle = railGrad;
         ctx.fillRect(0, fenceY - 7, width, 20);
 
-        ctx.strokeStyle = 'rgba(255, 215, 145, 0.4)';
+        ctx.strokeStyle = 'rgba(255, 215, 145, 0.42)';
         ctx.lineWidth = 1.2;
         ctx.beginPath();
         ctx.moveTo(0, fenceY - 6);
@@ -2368,42 +2765,47 @@
         // Draw Player's Ready +30% Enlarged Jade Bangle on the railing when PLAYING
         if (gameState === 'PLAYING' && banglesLeft > 0) {
           const hand = getPlayerHandPos();
+          let handPullX = 0;
+          let handPullY = 0;
 
-          // Aiming trajectory guide when dragging
-          if (pointerDown && isDraggingAim) {
+          if (activePointerId !== null && isDraggingAim) {
             const dx = pointerCurr.x - pointerStart.x;
             const dy = pointerCurr.y - pointerStart.y;
             if (dy < -15) {
-              const aimX = Math.max(width * 0.08, Math.min(width * 0.92, hand.x + dx * 1.45));
+              const aimX = Math.max(width * 0.075, Math.min(width * 0.925, hand.x + dx * 1.45));
               const aimY = Math.max(height * 0.18, Math.min(height * 0.71, hand.y + dy * 1.65));
+              handPullX = Math.max(-18, Math.min(18, dx * 0.12));
+              handPullY = Math.max(-12, Math.min(12, -dy * 0.04));
 
               ctx.save();
               ctx.setLineDash([6, 6]);
-              ctx.strokeStyle = 'rgba(110, 255, 198, 0.7)';
+              ctx.strokeStyle = 'rgba(110, 255, 198, 0.72)';
               ctx.lineWidth = 2.8;
               ctx.beginPath();
-              ctx.moveTo(hand.x, hand.y);
-              ctx.quadraticCurveTo((hand.x + aimX) * 0.5, Math.min(hand.y, aimY) - 65, aimX, aimY);
+              ctx.moveTo(hand.x + handPullX, hand.y + handPullY);
+              ctx.quadraticCurveTo((hand.x + aimX) * 0.5, Math.min(hand.y, aimY) - 70, aimX, aimY);
               ctx.stroke();
 
+              // Crisp landing ring reticle matching actual jade bangle landing footprint
               ctx.setLineDash([]);
-              ctx.strokeStyle = 'rgba(110, 255, 198, 0.9)';
-              ctx.lineWidth = 2.2;
+              ctx.strokeStyle = 'rgba(110, 255, 198, 0.92)';
+              ctx.lineWidth = 2.4;
               ctx.beginPath();
-              ctx.ellipse(aimX, aimY, 24, 15, 0, 0, Math.PI * 2);
+              ctx.ellipse(aimX, aimY, 26, 15, 0, 0, Math.PI * 2);
               ctx.stroke();
+              ctx.fillStyle = 'rgba(110, 255, 198, 0.16)';
+              ctx.fill();
               ctx.restore();
             }
           }
 
-          // Reserve stack of remaining bangles (+30% enlarged) on bottom-left railing
-          for (let b = 0; b < banglesLeft - 1; b++) {
-            drawJadeBangleRing(width * 0.19 + b * 20, hand.y + 8 - b * 5, BANGLE_STACK_RX, BANGLE_STACK_RY, 0);
+          const visibleReserve = Math.min(8, banglesLeft - 1);
+          for (let b = 0; b < visibleReserve; b++) {
+            drawJadeBangleRing(width * 0.145 + (b % 4) * 16, hand.y + 10 - b * 4.2, BANGLE_STACK_RX, BANGLE_STACK_RY, 0);
           }
 
-          // Main active jade bangle in center (+30% enlarged: 47x29)
           const floatOffset = Math.sin(globalTime * 3.8) * 3.5;
-          drawJadeBangleRing(hand.x, hand.y + floatOffset, BANGLE_BASE_RX, BANGLE_BASE_RY, 0);
+          drawJadeBangleRing(hand.x + handPullX, hand.y + floatOffset + handPullY, BANGLE_BASE_RX, BANGLE_BASE_RY, handPullX * 0.01);
         }
 
         ctx.restore();
@@ -2416,21 +2818,18 @@
 
         const bandThick = Math.max(5.0, rx * 0.25);
 
-        // 1. Deep 3D drop shadow
         ctx.strokeStyle = 'rgba(0, 0, 0, 0.55)';
         ctx.lineWidth = bandThick * 1.05;
         ctx.beginPath();
         ctx.ellipse(0, 4.5, rx, ry, 0, 0, Math.PI * 2);
         ctx.stroke();
 
-        // 2. Outer dark emerald edge for 3D cylindrical volume
         ctx.strokeStyle = '#064e3b';
         ctx.lineWidth = bandThick + 2;
         ctx.beginPath();
         ctx.ellipse(0, 0, rx, ry, 0, 0, Math.PI * 2);
         ctx.stroke();
 
-        // 3. Translucent Imperial Emerald Jade Body (冰種翠玉質感)
         const jadeGrad = ctx.createLinearGradient(-rx, -ry, rx, ry);
         jadeGrad.addColorStop(0, '#a7f3d0');
         jadeGrad.addColorStop(0.28, '#34d399');
@@ -2444,7 +2843,6 @@
         ctx.ellipse(0, 0, rx, ry, 0, 0, Math.PI * 2);
         ctx.stroke();
 
-        // 4. Glossy Jade Specular Rim Highlights
         ctx.strokeStyle = 'rgba(236, 253, 245, 0.88)';
         ctx.lineWidth = Math.max(1.8, rx * 0.065);
         ctx.beginPath();
@@ -2461,7 +2859,7 @@
       }
 
       // ==========================================
-      // 12. MAIN 60FPS ANIMATION LOOP
+      // 12. MAIN 60FPS PHYSICS & RENDER LOOP
       // ==========================================
       let lastTime = performance.now();
       let fireworkSpawnAccum = 0;
@@ -2469,7 +2867,12 @@
       function update(dt) {
         globalTime += dt;
 
-        // 1. Update ambient warm dust particles
+        if (shakeTime > 0) {
+          shakeTime = Math.max(0, shakeTime - dt);
+          if (shakeTime === 0) shakeIntensity = 0;
+        }
+
+        // Ambient warm dust
         for (let i = 0; i < ambientDust.length; i++) {
           const d = ambientDust[i];
           d.x += d.vx * dt + Math.sin(globalTime * 1.5 + d.phase) * 0.15;
@@ -2482,26 +2885,34 @@
           if (d.x > width) d.x = 0;
         }
 
-        // 2. Move shelf items horizontally (緩慢左右交叉移動)
+        // Smooth conveyor movement of shelf items using normalized u in [0, 1)
         for (let i = 0; i < items.length; i++) {
           const it = items[i];
           const row = shelfRows[it.rowIndex];
           if (!row) continue;
 
-          it.x += row.speed * dt;
           const trackW = row.right - row.left;
-          if (row.speed > 0 && it.x > row.right) {
-            it.x -= trackW;
-          } else if (row.speed < 0 && it.x < row.left) {
-            it.x += trackW;
+          if (trackW > 0) {
+            it.u += (row.speed * dt) / trackW;
+            if (it.u >= 1) it.u -= 1;
+            else if (it.u < 0) it.u += 1;
+            it.x = row.left + it.u * trackW;
           }
 
           if (it.captured && it.captureAnim < 1) {
-            it.captureAnim = Math.min(1, it.captureAnim + dt * 2.5);
+            it.captureAnim = Math.min(1, it.captureAnim + dt * 1.85);
           }
         }
 
-        // 3. Update active thrown Jade Bangles
+        // Tap landing ripples
+        for (let i = tapRipples.length - 1; i >= 0; i--) {
+          const rp = tapRipples[i];
+          rp.r += (rp.maxR - rp.r) * dt * 8.5;
+          rp.alpha -= dt * 2.2;
+          if (rp.alpha <= 0) tapRipples.splice(i, 1);
+        }
+
+        // Thrown Jade Bangles with 3D parabolic lift, foreshortening tilt & dynamic shadow plane
         for (let i = activeBangles.length - 1; i >= 0; i--) {
           const b = activeBangles[i];
           b.elapsed += dt;
@@ -2509,11 +2920,12 @@
 
           const easeT = 1 - Math.pow(1 - t, 1.65);
           b.x = b.startX + (b.targetX - b.startX) * easeT;
-          const linearY = b.startY + (b.targetY - b.startY) * easeT;
-          const arcLift = Math.sin(t * Math.PI) * b.arcHeight;
-          b.y = linearY - arcLift;
-          // Keep perspective scale larger so the +30% jade bangle looks substantial all the way to the shelf
+          b.groundY = b.startY + (b.targetY - b.startY) * easeT;
+          b.arcLift = Math.sin(t * Math.PI) * b.arcHeight;
+          b.y = b.groundY - b.arcLift;
           b.scale = 1.18 - 0.46 * easeT;
+          // 3D pitch: slightly taller while climbing, flattening horizontally as it collars the prize
+          b.tiltRatio = 0.62 + 0.14 * Math.sin(t * Math.PI) - 0.12 * easeT;
           b.rotation = t * Math.PI * 1.3;
 
           if (t >= 1) {
@@ -2522,12 +2934,12 @@
           }
         }
 
-        // 4. Update shattered curved jade shards with realistic shelf/floor bounce
+        // Curved shattered jade shards with shelf/floor bounce
         for (let i = jadeShards.length - 1; i >= 0; i--) {
           const sh = jadeShards[i];
           sh.x += sh.vx * dt;
           sh.y += sh.vy * dt;
-          sh.vy += 380 * dt; // gravity
+          sh.vy += 380 * dt;
           sh.rot += sh.vRot * dt;
 
           if (!sh.bounced && sh.y >= sh.floorY && sh.vy > 0) {
@@ -2539,12 +2951,10 @@
           }
 
           sh.alpha -= dt * 1.25;
-          if (sh.alpha <= 0) {
-            jadeShards.splice(i, 1);
-          }
+          if (sh.alpha <= 0) jadeShards.splice(i, 1);
         }
 
-        // 5. Update hit glow rings & sparkles
+        // Glow rings & sparkles
         for (let i = particles.length - 1; i >= 0; i--) {
           const p = particles[i];
           if (p.kind === 'ring') {
@@ -2556,22 +2966,18 @@
             p.vy += 180 * dt;
             p.alpha -= p.decay * dt;
           }
-          if (p.alpha <= 0) {
-            particles.splice(i, 1);
-          }
+          if (p.alpha <= 0) particles.splice(i, 1);
         }
 
-        // 6. Update floating feedback text
+        // Floating feedback text
         for (let i = floatingTexts.length - 1; i >= 0; i--) {
           const ft = floatingTexts[i];
           ft.y += ft.vy * dt;
           ft.alpha -= dt * 1.15;
-          if (ft.alpha <= 0) {
-            floatingTexts.splice(i, 1);
-          }
+          if (ft.alpha <= 0) floatingTexts.splice(i, 1);
         }
 
-        // 7. Update fullscreen victory fireworks
+        // Victory fullscreen fireworks
         if (gameState === 'VICTORY') {
           fireworkSpawnAccum += dt;
           if (fireworkSpawnAccum >= 0.55) {
@@ -2586,39 +2992,86 @@
           fw.vy += 110 * dt;
           fw.vx *= 0.985;
           fw.alpha -= fw.decay * dt;
-          if (fw.alpha <= 0) {
-            fireworks.splice(i, 1);
-          }
+          if (fw.alpha <= 0) fireworks.splice(i, 1);
         }
       }
 
       function render() {
+        ctx.save();
         ctx.clearRect(0, 0, width, height);
 
-        // 1. Night Market Stall & Environment
-        drawNightMarketScene();
-
-        // 2. Shelf Items (Enlarged, detailed toys)
-        for (let i = 0; i < items.length; i++) {
-          drawToyItem(items[i]);
+        // Apply subtle damped micro-shake on jade shatter impact
+        if (shakeTime > 0 && shakeIntensity > 0) {
+          const mag = shakeIntensity * (shakeTime / 0.14);
+          ctx.translate((Math.random() - 0.5) * 2 * mag, (Math.random() - 0.5) * 2 * mag);
         }
 
-        // 3. Foreground Floor, Fence & +30% Enlarged Ready Jade Bangle
+        // 1. Night Market Backdrop, Side Decorations & Recessed Shelves
+        drawNightMarketBackdrop();
+
+        // 2. Row-by-Row Painter's Algorithm + Strict Per-Compartment Clipping:
+        //    Each shelf board is drawn first, then its items are clipped strictly to [innerLeft+2, innerRight-2]
+        //    and vertically inside that shelf's own compartment — 100% impossible for +2/+3/+5 or any toy to bleed through!
+        const bounds = getBoothInnerBounds();
+        const clipX = bounds.innerLeft + 2;
+        const clipW = Math.max(0, (bounds.innerRight - 2) - clipX);
+        for (let r = 0; r < shelfRows.length; r++) {
+          const row = shelfRows[r];
+          drawSingleShelfBoard(row);
+
+          ctx.save();
+          ctx.beginPath();
+          ctx.rect(clipX, row.clipTop, clipW, row.clipBottom - row.clipTop);
+          ctx.clip();
+          for (let i = 0; i < items.length; i++) {
+            if (items[i].rowIndex === r) {
+              drawToyItem(items[i]);
+            }
+          }
+          ctx.restore();
+        }
+
+        // 3. Rosewood Front Pillars, Red Curtain Valance, Signboard, Bulbs & Lanterns
+        drawWoodenStallFrontPillarsAndTop();
+
+        // 4. Foreground Floor, Wooden Fence & Ready +30% Jade Bangle
         drawFloorAndFence();
 
-        // 4. Flying +30% Enlarged Jade Bangles
-        for (let i = 0; i < activeBangles.length; i++) {
-          const b = activeBangles[i];
-          drawJadeBangleRing(
-            b.x,
-            b.y,
-            BANGLE_BASE_RX * 0.95 * b.scale,
-            BANGLE_BASE_RY * 0.95 * b.scale,
-            b.rotation * 0.14
-          );
+        // 5. Subtle Tap Ripples
+        for (let i = 0; i < tapRipples.length; i++) {
+          const rp = tapRipples[i];
+          ctx.save();
+          ctx.globalAlpha = Math.max(0, rp.alpha);
+          ctx.strokeStyle = '#a7f3d0';
+          ctx.lineWidth = 2;
+          ctx.beginPath();
+          ctx.ellipse(rp.x, rp.y, rp.r, rp.r * 0.58, 0, 0, Math.PI * 2);
+          ctx.stroke();
+          ctx.restore();
         }
 
-        // 5. Realistic Curved Jade Fracture Shards (when missing a target)
+        // 6. Flying Jade Bangles + Dynamic 3D Projected Ground Shadows
+        for (let i = 0; i < activeBangles.length; i++) {
+          const b = activeBangles[i];
+          const rx = BANGLE_BASE_RX * 0.95 * b.scale;
+          const ry = rx * b.tiltRatio;
+
+          // Dynamic projected shadow on the shelf/floor directly below the bangle
+          const shadowScale = Math.max(0.45, 1 - b.arcLift / 260);
+          const shadowAlpha = Math.max(0.12, 0.45 * shadowScale);
+          ctx.save();
+          ctx.strokeStyle = `rgba(10, 3, 0, ${shadowAlpha})`;
+          ctx.lineWidth = Math.max(3, rx * 0.18 * shadowScale);
+          ctx.beginPath();
+          ctx.ellipse(b.x, b.groundY + 4, rx * shadowScale, rx * 0.5 * shadowScale, 0, 0, Math.PI * 2);
+          ctx.stroke();
+          ctx.restore();
+
+          // Actual 3D pitched flying emerald jade bangle
+          drawJadeBangleRing(b.x, b.y, rx, ry, b.rotation * 0.12);
+        }
+
+        // 7. Realistic Curved Jade Fracture Shards
         for (let i = 0; i < jadeShards.length; i++) {
           const sh = jadeShards[i];
           ctx.save();
@@ -2626,7 +3079,6 @@
           ctx.rotate(sh.rot);
           ctx.globalAlpha = Math.max(0, sh.alpha);
 
-          // Curved broken jade arc segment
           ctx.strokeStyle = '#047857';
           ctx.lineWidth = sh.thick + 1.5;
           ctx.lineCap = 'butt';
@@ -2640,7 +3092,6 @@
           ctx.arc(0, 0, sh.arcRadius, -sh.arcSpan * 0.5, sh.arcSpan * 0.5);
           ctx.stroke();
 
-          // Crystalline fracture highlight
           ctx.strokeStyle = '#ecfdf5';
           ctx.lineWidth = 1.4;
           ctx.beginPath();
@@ -2650,7 +3101,7 @@
           ctx.restore();
         }
 
-        // 6. Hit Glow Rings & Sparkles
+        // 8. Hit Glow Rings & Sparkles
         for (let i = 0; i < particles.length; i++) {
           const p = particles[i];
           ctx.save();
@@ -2670,7 +3121,7 @@
           ctx.restore();
         }
 
-        // 7. Ambient Warm Night Market Dust
+        // 9. Ambient Warm Night Market Dust
         for (let i = 0; i < ambientDust.length; i++) {
           const d = ambientDust[i];
           ctx.fillStyle = `rgba(255, 220, 140, ${d.alpha * 0.45})`;
@@ -2679,7 +3130,7 @@
           ctx.fill();
         }
 
-        // 8. Floating Feedback Texts
+        // 10. Floating Feedback Texts
         for (let i = 0; i < floatingTexts.length; i++) {
           const ft = floatingTexts[i];
           ctx.save();
@@ -2694,7 +3145,14 @@
           ctx.restore();
         }
 
-        // 9. Victory Fullscreen Fireworks
+        // 11. Subtle Warm Night Market Vignette
+        const vig = ctx.createRadialGradient(width * 0.5, height * 0.48, width * 0.35, width * 0.5, height * 0.5, height * 0.72);
+        vig.addColorStop(0, 'rgba(0, 0, 0, 0)');
+        vig.addColorStop(1, 'rgba(8, 2, 0, 0.36)');
+        ctx.fillStyle = vig;
+        ctx.fillRect(0, 0, width, height);
+
+        // 12. Victory Fullscreen Fireworks
         for (let i = 0; i < fireworks.length; i++) {
           const fw = fireworks[i];
           ctx.save();
@@ -2707,10 +3165,12 @@
           ctx.fill();
           ctx.restore();
         }
+
+        ctx.restore();
       }
 
       function loop(now) {
-        const dt = Math.min(0.05, (now - lastTime) / 1000);
+        const dt = Math.min(0.05, Math.max(0, (now - lastTime) / 1000));
         lastTime = now;
         update(dt);
         render();
@@ -2729,7 +3189,12 @@
         ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
 
         initAtmosphereParticles();
-        setupLevel(currentLevelIndex);
+        if (shelfRows.length === 0) {
+          setupLevel(currentLevelIndex);
+        } else {
+          // Non-destructive resize preserves live level progress, hits, and bangles!
+          rescaleActiveLevelLayout();
+        }
         render();
       }
 
